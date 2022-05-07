@@ -12,16 +12,15 @@ typedef struct	s_stack
 
 typedef struct	s_parameters;
 {
-	char	*lime;
+	char	*line;
 	char	**split;
 	char	**arguments;
 	int		nword;
 	int		length;
 	int		print;
 	int		color;
-	int		fd;
-	t_stk	*a;
-	t_stk	*b;
+	t_stack	*a;
+	t_stack	*b;
 }
 
 /*Operaciones ejecutables*/
