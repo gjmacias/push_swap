@@ -3,12 +3,12 @@
 
 #include "libft.h"
 
-typedef struct	s_stk
+typedef struct	s_stack
 {
 	int	num;
-	struct s_stk	*next;
-	struct s_stk	*previous;
-}	t_stk;
+	struct s_stack	*next;
+	struct s_stack	*previous;
+}	t_stack;
 
 typedef struct	s_parameters;
 {
