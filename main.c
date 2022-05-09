@@ -6,18 +6,12 @@ t_stack	*fill_stack(t_var *parameters, char **split)
 	t_stack	*tmp;
 	
 	i = 0;
-	parameters->max = ft_atoi(split[i]);
-	parameters->min = ft_atoi(split[i]);
 	while (split[i])
 	{
 		tmp = malloc(sizeof(t_stack));
 		if (tmp == NULL)
 			return (NULL);
 		tmp->number = ft_atoi(split[i++]);
-		if (tmp->number < parameters->min)
-			parameters->min = tmp->number;
-		if (tmp->number > parameters->max)
-			parameters->max = tmp->number;
 		tmp->next = NULL;
 		tmp->previous = NULL;
 		add_back(&v->a, temp);
@@ -43,7 +37,7 @@ void	push_swap(t_parameters *parameters, int nword, char **arguments)
 	check_is_number(parameters->split);
 	parameters->a = fill_stack(parameters, parameters->split);
 	parameters->b = NULL;
-	parameters->length = count_next(parameters->a);
+	parameters->length = check_length(parameters->a);
 	sort_numbers(&(parameters->a), &(parameters->b), parameters);
 }
 
