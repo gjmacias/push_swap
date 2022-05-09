@@ -5,23 +5,25 @@
 
 typedef struct	s_stack
 {
-	int	num;
+	int	number;
 	struct s_stack	*next;
 	struct s_stack	*previous;
 }	t_stack;
 
-typedef struct	s_parameters;
+typedef struct	s_parameters
 {
 	char	*line;
 	char	**split;
 	char	**arguments;
 	int		nword;
 	int		length;
+	int		min;
+	int		max;
 	int		print;
 	int		color;
 	t_stack	*a;
 	t_stack	*b;
-}
+}	t_parameters;
 
 /*Operaciones ejecutables*/
 
