@@ -1,5 +1,32 @@
 # include "push_swap.h"
 
+t_stack	*fill_stack(t_var *parameters, char **split)
+{
+	int	i;
+	t_stack	*tmp;
+	
+	i = 0;
+	parameters->max = ft_atoi(split[i]);
+	parameters->min = ft_atoi(split[i]);
+	while (split[i])
+	{
+		tmp = malloc(sizeof(t_stack));
+		if (tmp == NULL)
+			return (NULL);
+		tmp->number = ft_atoi(split[i++]);
+		if (tmp->number < parameters->min)
+			parameters->min = tmp->number;
+		if (tmp->number > parameters->max)
+			parameters->max = tmp->number;
+		tmp->next = NULL;
+		tmp->previous = NULL;
+		add_back(&v->a, temp);
+		tmp = NULL;
+	}
+	free(tmp);
+	return (v->a);
+}
+
 char	**fill_split(t_var *parameters, int nword, char **arguments)
 {
 	if (nword == 2)
@@ -9,14 +36,15 @@ char	**fill_split(t_var *parameters, int nword, char **arguments)
 	return [parameters->split];
 }
 
-void	push_swap(t_var *parameters, int nword, char***arguments)
+void	push_swap(t_parameters *parameters, int nword, char **arguments)
 {
-	t_stack	*stack;
-	
-	stack = NULL;
 	parameters->split = fill_split(parameters, nword, arguments);
 	check_duplicate(parameters->split);
 	check_is_number(parameters->split);
+	parameters->a = fill_stack(parameters, parameters->split);
+	parameters->b = NULL;
+	parameters->length = count_next(parameters->a);
+	sort_numbers(&(parameters->a), &(parameters->b), parameters);
 }
 
 t_parameters	*ft_init_parameters(t_parameters *parameters)
