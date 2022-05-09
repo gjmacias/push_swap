@@ -1,5 +1,35 @@
 #include "push_swap.h"
 
+int check_length(t_stack *a)
+{
+	int	len;
+	
+	len = 0;
+	while (a)
+	{
+		len ++;
+		a = a->next;
+	}
+	return (len);
+}
+
+int	check_order(t_stack **a, int length)
+{
+	t_stack	*tmp;
+	
+	if (check_length(*a) != length)
+		return (-1);
+	tmp = *a;
+	while (tmp && tmp->next)
+	{
+		if (tmp->number < tmp->next->number)
+			tmp = tmp->next;
+		else
+			return (-1);
+	}
+	return (0);
+}
+
 void	check_duplicate(char **split)
 {
 	int	i;
@@ -26,8 +56,8 @@ void check_is_number(char **split)
 	i = -1;
 	while(split[++i])
 	{
-		if ()
 		if (split[i] != "0" && ft_atoi(split[i]) == 0)
 			exit(EXIT_FAILURE);
+		if (hacer funcion igual a atoi para long )
 	}	
 }
