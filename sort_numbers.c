@@ -18,8 +18,18 @@ void	search_min_max(t_parameters **parameters, t_stack **a)
 void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 {
 	search_min_max(&(parameters), a);
-	while (check_order != 0)
+	while (check_order() == 0)
 	{
-		
+		if (!a)
+		{
+			order(a, b, parameters);
+			break ;
+		}
+		if (*a->number == parameters->min)
+			push_up(a, b);
+		elif (*a->number == parameters->max)
+			push_down(a, b);
+		else
+			*a = (*a->next);
 	}
 }
