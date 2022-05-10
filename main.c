@@ -13,7 +13,6 @@ t_stack	*fill_stack(t_var *parameters, char **split)
 			return (NULL);
 		tmp->number = ft_atoi(split[i++]);
 		tmp->next = NULL;
-		tmp->previous = NULL;
 		add_back(&v->a, temp);
 		tmp = NULL;
 	}
