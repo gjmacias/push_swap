@@ -7,7 +7,6 @@ typedef struct	s_stack
 {
 	int	number;
 	struct s_stack	*next;
-	struct s_stack	*previous;
 }	t_stack;
 
 typedef struct	s_parameters
