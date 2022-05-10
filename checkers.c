@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-int check_length(t_stack *a)
+int	check_length(t_stack *a)
 {
 	int	len;
-	
+
 	len = 0;
 	while (a)
 	{
@@ -16,7 +16,7 @@ int check_length(t_stack *a)
 int	check_order(t_stack **a, int length)
 {
 	t_stack	*tmp;
-	
+
 	if (check_length(*a) != length)
 		return (-1);
 	tmp = *a;
@@ -34,9 +34,9 @@ void	check_duplicate(char **split)
 {
 	int	i;
 	int	j;
-	
+
 	i = -1;
-	while(split[++i])
+	while (split[++i])
 	{
 		j = -1;
 		while (split[++j])
@@ -47,17 +47,18 @@ void	check_duplicate(char **split)
 	}
 }
 
-void check_is_number(char **split)
+void	check_is_number(char **split)
 {
 	int	i;
 
 	if (!split[0])
 		exit (EXIT_FAILURE);
 	i = -1;
-	while(split[++i])
+	while (split[++i])
 	{
 		if (split[i] != "0" && ft_atoi(split[i]) == 0)
 			exit(EXIT_FAILURE);
 		if (hacer funcion igual a atoi para long )
-	}	
+			exit(EXIT_FAILURE);
+	}
 }

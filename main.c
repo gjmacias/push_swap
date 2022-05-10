@@ -2,9 +2,9 @@
 
 t_stack	*fill_stack(t_var *parameters, char **split)
 {
-	int	i;
+	int		i;
 	t_stack	*tmp;
-	
+
 	i = 0;
 	while (split[i])
 	{
@@ -26,7 +26,7 @@ char	**fill_split(t_var *parameters, int nword, char **arguments)
 		parameters->split = ft_split(arguments[1], ' ');
 	else
 		parameters->split = &arguments[1];
-	return [parameters->split];
+	return (arameters->split);
 }
 
 void	push_swap(t_parameters *parameters, int nword, char **arguments)
@@ -42,7 +42,7 @@ void	push_swap(t_parameters *parameters, int nword, char **arguments)
 
 t_parameters	*ft_init_parameters(t_parameters *parameters)
 {
-	parameters = (t_parameters *)malloc(sizeof( t_parameters));
+	parameters = (t_parameters *)malloc(sizeof(t_parameters));
 	if (parameters == NULL)
 		exit(EXIT_FAILURE);
 	parameters->a = NULL;
@@ -54,19 +54,19 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	return (parameters);
 }
 
-int main(int nword, char *arguments[])
+int	main(int nword, char *arguments[])
 {
 	t_parameters	*parameters;
-	
+
 	parameters = NULL;
-	if  (nword < 2)
+	if (nword < 2)
 		exit(EXIT_FAILURE);
 	parameters = ft_init_parameters(parameters);
-	if(!ft_strcmp(arguments[1], "-h"))
+	if (!ft_strcmp(arguments[1], "-h"))
 		h_for_help();
 	else
 		push_swap(parameters, nword, arguments);
 	free(parameters);
-	parameters = NULL;	
+	parameters = NULL;
 	return (0);
 }

@@ -1,14 +1,14 @@
 #include "push_swap.h"
 
-void p_stack()
+void	p_stack()
 {
 	
 }
 
-void s_stack(t_stack **top)
+void	s_stack(t_stack **top)
 {
 	int	tmp;
-	
+
 	if ((*top) && (*top->next))
 	{
 		tmp = *top->number;

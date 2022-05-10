@@ -1,15 +1,15 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "libft.h"
+# include "libft.h"
 
-typedef struct	s_stack
+typedef struct s_stack
 {
-	int	number;
+	int			number;
 	struct s_stack	*next;
 }	t_stack;
 
-typedef struct	s_parameters
+typedef struct s_parameters
 {
 	char	*line;
 	char	**split;
