@@ -26,10 +26,10 @@ void	search_min_max(t_parameters **parameters, t_stack **a)
 }
 
 /*
-** ACLARACION: up significa que tu estas en la posicion ej: 5 y tienes que
-** ir a la 3. en ese caso tendras que hacer 'rra' para ir atras hasta el 3.
-** down significa que tu estas en el 5 y quieres bajar al 8, deberas hacer
-**  'ra' porque quieres seguir bajando en el stack.
+** ACLARACION: "down" significa que tu estas en la posicion ej: 5 y tienes 
+** que ir a la 3. en ese caso tendras que hacer 'rra' para ir abajo del stack.
+** "up" significa que tu estas en el 5 y quieres subir al 8, deberas hacer
+**  'ra' porque quieres seguir avanzando en el stack.
 */
 
 int	algoritmia(int max_up, int max_down, int min_up, int min_down)
@@ -46,8 +46,8 @@ int	algoritmia(int max_up, int max_down, int min_up, int min_down)
 	else
 		tmp_down = max_down;
 	if (tmp_up >= tmp_down)
-		return (0);
-	return (42);
+		return (42);
+	return (0);
 }
 
 /*
