@@ -12,6 +12,7 @@ t_stack	*fill_stack(t_var *parameters, char **split)
 		if (tmp == NULL)
 			return (NULL);
 		tmp->number = ft_atoi(split[i++]);
+		tmp->position = i;
 		tmp->next = NULL;
 		add_back(&v->a, temp);
 		tmp = NULL;
@@ -37,6 +38,7 @@ void	push_swap(t_parameters *parameters, int nword, char **arguments)
 	parameters->a = fill_stack(parameters, parameters->split);
 	parameters->b = NULL;
 	parameters->length = check_length(parameters->a);
+	parameters->length_a = check_length(parameters->a);
 	sort_numbers(&(parameters->a), &(parameters->b), parameters);
 }
 
