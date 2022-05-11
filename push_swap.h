@@ -6,6 +6,7 @@
 typedef struct s_stack
 {
 	int			number;
+	int			position;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -14,10 +15,12 @@ typedef struct s_parameters
 	char	*line;
 	char	**split;
 	char	**arguments;
-	int		nword;
+	int		length_a;
 	int		length;
 	int		min;
 	int		max;
+	int		min_pos;
+	int		max_pos;
 	int		print;
 	int		color;
 	t_stack	*a;
