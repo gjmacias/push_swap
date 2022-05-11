@@ -5,23 +5,23 @@ void	search_min_max(t_parameters **parameters, t_stack **a)
 	int	pos;
 
 	pos = 0;
-	*parameters->max = *a->number;
-	*parameters->min = *a->number;
-	*parameters->length_a = check_length(a);
+	(*parameters)->max = (*a)->number;
+	(*parameters)->min = (*a)->number;
+	(*parameters)->length_a = check_length(a);
 	while (*a)
 	{
-		*a->position = ++pos;
-		if (*a->number <= *parameters->min)
+		(*a)->position = ++pos;
+		if ((*a)->number <= (*parameters)->min)
 		{
-			*parameters->min = *a->number;
-			*parameters->min_pos = *a->position;
+			(*parameters)->min = (*a)->number;
+			(*parameters)->min_pos = (*a)->position;
 		}
-		if (*a->number >= *parameters->max)
+		if ((*a)->number >= (*parameters)->max)
 		{
-			*parameters->max = *a->number;
-			*parameters->max_pos = *a->position;
+			(*parameters)->max = (*a)->number;
+			(*parameters)->max_pos = (*a)->position;
 		}
-		*a = (*a->next);
+		*a = ((*a)->next);
 	}
 }
 
@@ -69,22 +69,22 @@ int	calculus(t_parameters *parameters, t_stack **a)
 	
 	if (*a->poisition > parametrs->min_pos)
 	{
-		min_down = *a->poisition - parametrs->min_pos;
+		min_down = (*a)->poisition - parametrs->min_pos;
 		min_up = parameters->length_a - min_down;
 	}
 	else
 	{
-		min_up = parametrs->min_pos - *a->poisition;
+		min_up = parametrs->min_pos - (*a)->poisition;
 		min_down = parameters->length_a - min_up;
 	}
 	if (*a->poisition > parametrs->max_pos)
 	{
-		max_down = *a->poisition - parametrs->max_pos;
+		max_down = (*a)->poisition - parametrs->max_pos;
 		max_up = parameters->length_a - max_down;
 	}
 	else
 	{
-		max_up = parametrs->max_pos - *a->poisition;
+		max_up = parametrs->max_pos - (*a)->poisition;
 		max_down = parameters->length_a - max_up;
 	}
 	return (algoritmia(max_up, max_down, min_up, min_down));
@@ -100,14 +100,11 @@ void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 			order(a, b, parameters);
 			break ;
 		}
-		if (*a->number == parameters->min)
+		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
 		{
-			push_up(a, b);
-			search_min_max(&(parameters), a);
-		}
-		elif (*a->number == parameters->max)
-		{
-			push_down(a, b);
+			pa(a, b);
+			if ((*a)->number == parameters->max)
+				ra(b);
 			search_min_max(&(parameters), a);
 		}
 		else
