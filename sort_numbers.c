@@ -45,7 +45,7 @@ int	algoritmia(int max_up, int max_down, int min_up, int min_down)
 		tmp_down = min_down;
 	else
 		tmp_down = max_down;
-	if (tmp_up >= tmp_down)
+	if (tmp_up > tmp_down)
 		return (42);
 	return (0);
 }
