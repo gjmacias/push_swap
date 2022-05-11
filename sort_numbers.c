@@ -84,10 +84,10 @@ int	calculus(t_parameters *parameters, t_stack **a)
 	}
 	else
 	{
-		max_up = parametrs->min_pos - *a->poisition;
+		max_up = parametrs->max_pos - *a->poisition;
 		max_down = parameters->length_a - max_up;
 	}
-	return (algoritmia(max_up, max_down, min_up, min_down))
+	return (algoritmia(max_up, max_down, min_up, min_down));
 }
 
 void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
