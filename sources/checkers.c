@@ -1,14 +1,16 @@
 #include "push_swap.h"
 
-int	check_length(t_stack *a)
+int	check_length(t_stack **a)
 {
 	int	len;
+	t_stack *tmp;
 
 	len = 0;
-	while (a)
+	tmp = (*a);
+	while (tmp)
 	{
 		len ++;
-		a = a->next;
+		(tmp) = (tmp)->next;
 	}
 	return (len);
 }
