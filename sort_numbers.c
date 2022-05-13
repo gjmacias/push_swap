@@ -2,26 +2,28 @@
 
 void	search_min_max(t_parameters **parameters, t_stack **a)
 {
-	int	pos;
-
+	int	    pos;
+	t_stack *tmp;
+	
 	pos = 0;
-	(*parameters)->max = (*a)->number;
-	(*parameters)->min = (*a)->number;
+	tmp = (*a);
+	(*parameters)->max = (tmp)->number;
+	(*parameters)->min = (tmp)->number;
 	(*parameters)->length_a = check_length(a);
-	while (*a)
+	while ((tmp) != NULL)
 	{
-		(*a)->position = ++pos;
-		if ((*a)->number <= (*parameters)->min)
+		(tmp)->position = ++pos;
+		if ((tmp)->number <= (*parameters)->min)
 		{
-			(*parameters)->min = (*a)->number;
-			(*parameters)->min_pos = (*a)->position;
+			(*parameters)->min = (tmp)->number;
+			(*parameters)->min_pos = (tmp)->position;
 		}
-		if ((*a)->number >= (*parameters)->max)
+		if ((tmp)->number >= (*parameters)->max)
 		{
-			(*parameters)->max = (*a)->number;
-			(*parameters)->max_pos = (*a)->position;
+			(*parameters)->max = (tmp)->number;
+			(*parameters)->max_pos = (tmp)->position;
 		}
-		*a = ((*a)->next);
+		(tmp) = ((tmp)->next);
 	}
 }
 
@@ -67,24 +69,24 @@ int	calculus(t_parameters *parameters, t_stack **a)
 	int	min_up;
 	int	min_down;
 	
-	if (*a->poisition > parametrs->min_pos)
+	if ((*a)->position > parameters->min_pos)
 	{
-		min_down = (*a)->poisition - parametrs->min_pos;
+		min_down = (*a)->position - parameters->min_pos;
 		min_up = parameters->length_a - min_down;
 	}
 	else
 	{
-		min_up = parametrs->min_pos - (*a)->poisition;
+		min_up = parameters->min_pos - (*a)->position;
 		min_down = parameters->length_a - min_up;
 	}
-	if (*a->poisition > parametrs->max_pos)
+	if ((*a)->position > parameters->max_pos)
 	{
-		max_down = (*a)->poisition - parametrs->max_pos;
+		max_down = (*a)->position - parameters->max_pos;
 		max_up = parameters->length_a - max_down;
 	}
 	else
 	{
-		max_up = parametrs->max_pos - (*a)->poisition;
+		max_up = parameters->max_pos - (*a)->position;
 		max_down = parameters->length_a - max_up;
 	}
 	return (algoritmia(max_up, max_down, min_up, min_down));
@@ -93,7 +95,7 @@ int	calculus(t_parameters *parameters, t_stack **a)
 void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 {
 	search_min_max(&(parameters), a);
-	while (check_order(a, parameters->length) == 0)
+	while (check_order(a, parameters->length) != 0)
 	{
 		if (!a)
 		{
@@ -103,9 +105,10 @@ void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
 		{
 			p_stack(a, b);
-			if ((*b)->number == parameters->max)
+			if ((*b)->number == parameters->max && (*b)->number != parameters->min)
 				r_stack(b);
-			search_min_max(&(parameters), a);
+			if (*a)
+			    search_min_max(&(parameters), a);
 		}
 		else
 		{
