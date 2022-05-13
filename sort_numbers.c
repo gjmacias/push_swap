@@ -102,17 +102,17 @@ void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 		}
 		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
 		{
-			pa(a, b);
-			if ((*a)->number == parameters->max)
-				ra(b);
+			p_stack(a, b);
+			if ((*b)->number == parameters->max)
+				r_stack(b);
 			search_min_max(&(parameters), a);
 		}
 		else
 		{
 			if (calculus(parameters, a) == 0)
-				ra(a);
+				r_stack(a);
 			else 
-				rra(a);
+				rr_stack(a);
 		}
 	}
 }
