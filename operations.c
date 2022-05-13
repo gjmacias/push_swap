@@ -21,6 +21,23 @@ void    add_back(t_stack **stack, t_stack *new)
     }
 }
 
+void	order(t_stack **a, t_stack **b, t_parameters *parameters)
+{
+	search_min_max(&(parameters), b);
+	if (calculus(parameters, b) == 0)
+	{
+		while ((*b)->number != parameters->max)
+			r_stack(b);
+	}
+	else
+	{
+		while ((*b)->number != parameters->max)
+			rr_stack(b);
+	}
+	while (*b)
+		p_stack(b, a);
+}
+
 void	p_stack(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
