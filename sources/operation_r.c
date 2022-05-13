@@ -3,8 +3,8 @@
 /*
 ** 		¡¡¡EXPLICACIÓN PRINCIPAL EN "libft/ft_lstadd_back.c" !!!
 ** 
-** Espero que lo leas o entiendas bien los punteros "tmp" y por qué son importantes,
-** en estos casos es igual de importante.
+** Espero que lo leas o entiendas bien los punteros "tmp" y por qué son importantes, en estos
+** casos es igual de útil.
 **
 **
 ** En "r_stack" guardamos el primer puntero en "tmp", saltamos al siguiente y al puntero "tmp"
