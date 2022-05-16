@@ -6,12 +6,12 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:35:34 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 16:36:08 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:37:26 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
 
-t_stack	*fill_stack(t_var *parameters, char **split)
+t_stack	*fill_stack(t_parameters *parameters, char **split)
 {
 	int		i;
 	t_stack	*tmp;
@@ -25,31 +25,28 @@ t_stack	*fill_stack(t_var *parameters, char **split)
 		tmp->number = ft_atoi(split[i++]);
 		tmp->position = i;
 		tmp->next = NULL;
-		add_back(&v->a, temp);
+		ft_stkadd_back(&parameters->a, tmp);
 		tmp = NULL;
 	}
 	free(tmp);
-	return (v->a);
+	return (parameters->a);
 }
 
-char	**fill_split(t_var *parameters, int nword, char **arguments)
+char	**fill_split(t_parameters *parameters, int nword, char **arguments)
 {
-	if (nword == 2)
-		parameters->split = ft_split(arguments[1], ' ');
-	else
-		parameters->split = &arguments[1];
-	return (arameters->split);
+	parameters->split = &arguments[1];
+	return (parameters->split);
 }
 
 void	push_swap(t_parameters *parameters, int nword, char **arguments)
 {
 	parameters->split = fill_split(parameters, nword, arguments);
-	check_duplicate(parameters->split);
 	check_is_number(parameters->split);
 	parameters->a = fill_stack(parameters, parameters->split);
+	check_duplicate(&(parameters->a));
 	parameters->b = NULL;
-	parameters->length = check_length(parameters->a);
-	parameters->length_a = check_length(parameters->a);
+	parameters->length = check_length(&parameters->a);
+	parameters->length_a = check_length(&parameters->a);
 	sort_numbers(&(parameters->a), &(parameters->b), parameters);
 }
 
@@ -62,7 +59,7 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	parameters->b = NULL;
 	parameters->line = NULL;
 	parameters->split = NULL;
-	parameters->lenght = 0;
+	parameters->length = 0;
 	parameters->print = 0;
 	return (parameters);
 }

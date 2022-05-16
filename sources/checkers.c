@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:33:00 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 16:35:27 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:36:38 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -30,7 +30,7 @@ int	check_order(t_stack **a, int length)
 {
 	t_stack	*tmp;
 
-	if (check_length(*a) != length)
+	if (check_length(a) != length)
 		return (-1);
 	tmp = *a;
 	while (tmp && tmp->next)
@@ -43,20 +43,23 @@ int	check_order(t_stack **a, int length)
 	return (0);
 }
 
-void	check_duplicate(char **split)
+void	check_duplicate(t_stack **a)
 {
-	int	i;
-	int	j;
+	t_stack	*tmp1;
+	t_stack	*tmp2;
 
-	i = -1;
-	while (split[++i])
+	tmp1 = (*a);
+	while (tmp1)
 	{
-		j = -1;
-		while (split[++j])
+		tmp2 = tmp1;
+		while (tmp2)
 		{
-			if ((j != i) && (ft_strcmp(split[i], split[j]) == 0))
+			if ((tmp1->position != tmp2->position)
+				&& (tmp1->number == tmp2->number))
 				ft_error(3);
+			tmp2 = tmp2->next;
 		}
+		tmp1 = tmp1->next;
 	}
 }
 

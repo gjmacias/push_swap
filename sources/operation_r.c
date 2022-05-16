@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:36:19 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 16:41:30 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:16:22 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -33,7 +33,7 @@ void	r_stack(t_stack **stack)
 	tmp = (*stack);
 	(*stack) = (*stack)->next;
 	tmp->next = NULL;
-	add_back(stack, tmp);
+	ft_stkadd_back(stack, tmp);
 }
 
 void	r_rboth(t_stack **a, t_stack **b)
@@ -69,7 +69,7 @@ void	rr_stack(t_stack **stack)
 		stack_tmp = stack_tmp->next;
 	tmp = stack_tmp->next;
 	stack_tmp->next = NULL;
-	add_front(stack, tmp);
+	ft_stkadd_front(stack, tmp);
 }
 
 void	rr_rboth(t_stack **a, t_stack **b)

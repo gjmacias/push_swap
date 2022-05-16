@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:41:39 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 16:42:02 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:16:07 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	p_stack(t_stack **a, t_stack **b)
 
 	tmp = (t_stack *) malloc(sizeof(t_stack));
 	if (tmp == NULL)
-		return (NULL);
+		ft_error(1);
 	if (*b == NULL)
 	{
 		(*b) = (t_stack *) malloc(sizeof(t_stack));
 		if ((*b) == NULL)
-			return (NULL);
+			ft_error(1);
 		(*b)->number = (*a)->number;
 		(*b)->next = NULL;
 		tmp = (*a);
@@ -50,7 +50,7 @@ void	p_stack(t_stack **a, t_stack **b)
 	{
 		tmp->number = (*a)->number;
 		tmp->next = NULL;
-		add_front(b, tmp);
+		ft_stkadd_front(b, tmp);
 		tmp = (*a);
 		(*a) = (*a)->next;
 	}
