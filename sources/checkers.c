@@ -49,6 +49,32 @@ void	check_duplicate(char **split)
 	}
 }
 
+int	check_atoi(const char *str)
+{
+	int			sign;
+	int			i;
+	long long int	num;
+
+	i = 0;
+	num = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
+		i++;
+	sign = ft_sign((char *)&str[i]);
+	while (str[i] == '+' || str [i] == '-')
+		i++;
+	if (str[i] < '0' || str[i] > '9')
+	    return (0);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = (num * 10) + (str[i] - '0');
+		if (num > INT_MAX || num < INT_MIN)
+		    return (0);
+		i++;
+	}
+	return (42);
+}
+
 void	check_is_number(char **split)
 {
 	int	i;
@@ -58,9 +84,7 @@ void	check_is_number(char **split)
 	i = -1;
 	while (split[++i])
 	{
-		if (split[i] != "0" && ft_atoi(split[i]) == 0)
-			exit(EXIT_FAILURE);
-		if (hacer funcion igual a atoi para long )
+		if (check_atoi(split[i]) == 0)
 			exit(EXIT_FAILURE);
 	}
 }
