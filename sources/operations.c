@@ -1,26 +1,5 @@
 #include "push_swap.h"
 
-void    add_front(t_stack **stack, t_stack *new)
-{
-    new->next = (*stack);
-    (*stack) = new;
-}
-
-void    add_back(t_stack **stack, t_stack *new)
-{
-    t_stack *tmp;
-    
-    if ((*stack) == NULL)
-        (*stack) = new;
-    else
-    {
-        tmp = (*stack);
-	    while (tmp->next)
-	        tmp = tmp->next;
-    tmp->next = new;
-    }
-}
-
 void	order(t_stack **a, t_stack **b, t_parameters *parameters)
 {
 	search_min_max(&(parameters), b);
@@ -76,4 +55,10 @@ void	s_stack(t_stack **top)
 		(*top)->number = (*top)->next->number;
 		(*top)->next->number = tmp;
 	}
+}
+
+void ss_stack(t_stack **a, t_stack **b)
+{
+	s_stack(a);
+	s_stack(b);
 }
