@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:44:48 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 16:47:01 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:52:04 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,36 +72,37 @@ int	algoritmia(int max_up, int max_down, int min_up, int min_down)
 ** buscar es más rápido por la izquierda o derecha). Repetirlo para el max
 ** y ver si es más rápido buscar el minimo o el máximo y luego si es por
 ** arriba o por abajo.
+**
+** 1 es up y 0 es down, solo que casualmente me ha saslido algo de 'more than
+** 25 lines -_-.
 */
 
 int	calculus(t_parameters *parameters, t_stack **a)
 {
-	int	max_up;
-	int	max_down;
-	int	min_up;
-	int	min_down;
+	int	max[2];
+	int	min[2];
 
 	if ((*a)->position > parameters->min_pos)
 	{
-		min_down = (*a)->position - parameters->min_pos;
-		min_up = parameters->length_a - min_down;
+		min[0] = (*a)->position - parameters->min_pos;
+		min[1] = parameters->length_a - min[0];
 	}
 	else
 	{
-		min_up = parameters->min_pos - (*a)->position;
-		min_down = parameters->length_a - min_up;
+		min[1] = parameters->min_pos - (*a)->position;
+		min[0] = parameters->length_a - min[1];
 	}
 	if ((*a)->position > parameters->max_pos)
 	{
-		max_down = (*a)->position - parameters->max_pos;
-		max_up = parameters->length_a - max_down;
+		max[0] = (*a)->position - parameters->max_pos;
+		max[1] = parameters->length_a - max[0];
 	}
 	else
 	{
-		max_up = parameters->max_pos - (*a)->position;
-		max_down = parameters->length_a - max_up;
+		max[1] = parameters->max_pos - (*a)->position;
+		max[0] = parameters->length_a - max[1];
 	}
-	return (algoritmia(max_up, max_down, min_up, min_down));
+	return (algoritmia(max[1], max[0], min[1], min[0]));
 }
 
 void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
