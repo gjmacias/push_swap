@@ -10,7 +10,7 @@ t_stack	*fill_stack(t_var *parameters, char **split)
 	{
 		tmp = malloc(sizeof(t_stack));
 		if (tmp == NULL)
-			return (NULL);
+			ft_error(2);
 		tmp->number = ft_atoi(split[i++]);
 		tmp->position = i;
 		tmp->next = NULL;
@@ -46,7 +46,7 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 {
 	parameters = (t_parameters *)malloc(sizeof(t_parameters));
 	if (parameters == NULL)
-		exit(EXIT_FAILURE);
+		ft_error(1);
 	parameters->a = NULL;
 	parameters->b = NULL;
 	parameters->line = NULL;
@@ -62,12 +62,9 @@ int	main(int nword, char *arguments[])
 
 	parameters = NULL;
 	if (nword < 2)
-		exit(EXIT_FAILURE);
+		ft_error(2);
 	parameters = ft_init_parameters(parameters);
-	if (!ft_strcmp(arguments[1], "-h"))
-		h_for_help();
-	else
-		push_swap(parameters, nword, arguments);
+	push_swap(parameters, nword, arguments);
 	free(parameters);
 	parameters = NULL;
 	return (0);
