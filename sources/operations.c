@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 16:41:39 by gmacias-          #+#    #+#             */
+/*   Updated: 2022/05/16 16:42:02 by gmacias-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	order(t_stack **a, t_stack **b, t_parameters *parameters)
@@ -57,7 +69,7 @@ void	s_stack(t_stack **top)
 	}
 }
 
-void ss_stack(t_stack **a, t_stack **b)
+void	ss_stack(t_stack **a, t_stack **b)
 {
 	s_stack(a);
 	s_stack(b);

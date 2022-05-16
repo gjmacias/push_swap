@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_numbers.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 16:44:48 by gmacias-          #+#    #+#             */
+/*   Updated: 2022/05/16 16:47:01 by gmacias-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	search_min_max(t_parameters **parameters, t_stack **a)
 {
-	int	    pos;
-	t_stack *tmp;
-	
+	int		pos;
+	t_stack	*tmp;
+
 	pos = 0;
 	tmp = (*a);
 	(*parameters)->max = (tmp)->number;
@@ -31,14 +43,14 @@ void	search_min_max(t_parameters **parameters, t_stack **a)
 ** ACLARACION: "down" significa que tu estas en la posicion ej: 5 y tienes 
 ** que ir a la 3. en ese caso tendras que hacer 'rra' para ir abajo del stack.
 ** "up" significa que tu estas en el 5 y quieres subir al 8, deberas hacer
-**  'ra' porque quieres seguir avanzando en el stack.
+** 'ra' porque quieres seguir avanzando en el stack.
 */
 
 int	algoritmia(int max_up, int max_down, int min_up, int min_down)
 {
 	int	tmp_up;
 	int	tmp_down;
-	
+
 	if (max_up > min_up)
 		tmp_up = min_up;
 	else
@@ -68,7 +80,7 @@ int	calculus(t_parameters *parameters, t_stack **a)
 	int	max_down;
 	int	min_up;
 	int	min_down;
-	
+
 	if ((*a)->position > parameters->min_pos)
 	{
 		min_down = (*a)->position - parameters->min_pos;
@@ -105,16 +117,17 @@ void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
 		{
 			p_stack(a, b);
-			if ((*b)->number == parameters->max && (*b)->number != parameters->min)
+			if ((*b)->number == parameters->max
+				&& (*b)->number != parameters->min)
 				r_stack(b);
 			if (*a)
-			    search_min_max(&(parameters), a);
+				search_min_max(&(parameters), a);
 		}
 		else
 		{
 			if (calculus(parameters, a) == 0)
 				r_stack(a);
-			else 
+			else
 				rr_stack(a);
 		}
 	}

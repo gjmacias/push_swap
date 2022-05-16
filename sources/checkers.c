@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkers.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 16:33:00 by gmacias-          #+#    #+#             */
+/*   Updated: 2022/05/16 16:35:27 by gmacias-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "push_swap.h"
 
 int	check_length(t_stack **a)
 {
-	int	len;
-	t_stack *tmp;
+	int		len;
+	t_stack	*tmp;
 
 	len = 0;
 	tmp = (*a);
@@ -51,8 +62,8 @@ void	check_duplicate(char **split)
 
 int	check_atoi(const char *str)
 {
-	int			sign;
-	int			i;
+	int				sign;
+	int				i;
 	long long int	num;
 
 	i = 0;
@@ -64,12 +75,12 @@ int	check_atoi(const char *str)
 	while (str[i] == '+' || str [i] == '-')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
-	    return (0);
+		return (0);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		num = (num * 10) + (str[i] - '0');
 		if (num > INT_MAX || num < INT_MIN)
-		    return (0);
+			return (0);
 		i++;
 	}
 	return (42);
