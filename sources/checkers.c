@@ -44,7 +44,7 @@ void	check_duplicate(char **split)
 		while (split[++j])
 		{
 			if ((j != i) && (ft_strcmp(split[i], split[j]) == 0))
-				exit(EXIT_FAILURE);
+				ft_error(3);
 		}
 	}
 }
@@ -80,11 +80,11 @@ void	check_is_number(char **split)
 	int	i;
 
 	if (!split[0])
-		exit (EXIT_FAILURE);
+		ft_error(2);
 	i = -1;
 	while (split[++i])
 	{
 		if (check_atoi(split[i]) == 0)
-			exit(EXIT_FAILURE);
+			ft_error(3);
 	}
 }
