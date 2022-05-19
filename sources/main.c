@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:35:34 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 18:37:26 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:45:58 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -32,15 +32,15 @@ t_stack	*fill_stack(t_parameters *parameters, char **split)
 	return (parameters->a);
 }
 
-char	**fill_split(t_parameters *parameters, int nword, char **arguments)
+char	**fill_split(t_parameters *parameters, char **arguments)
 {
 	parameters->split = &arguments[1];
 	return (parameters->split);
 }
 
-void	push_swap(t_parameters *parameters, int nword, char **arguments)
+void	push_swap(t_parameters *parameters, char **arguments)
 {
-	parameters->split = fill_split(parameters, nword, arguments);
+	parameters->split = fill_split(parameters, arguments);
 	check_is_number(parameters->split);
 	parameters->a = fill_stack(parameters, parameters->split);
 	check_duplicate(&(parameters->a));
@@ -72,8 +72,8 @@ int	main(int nword, char *arguments[])
 	if (nword < 2)
 		ft_error(2);
 	parameters = ft_init_parameters(parameters);
-	push_swap(parameters, nword, arguments);
+	push_swap(parameters, arguments);
 	free(parameters);
 	parameters = NULL;
-	return (0);
+	exit(EXIT_SUCCESS);
 }

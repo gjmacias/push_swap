@@ -6,23 +6,21 @@
 #    By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/16 17:23:41 by gmacias-          #+#    #+#              #
-#    Updated: 2022/05/16 17:33:48 by gmacias-         ###   ########.fr        #
+#    Updated: 2022/05/19 16:09:09 by gmacias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Se viene texto, para ver si me ayuda a entenderlo y tambien si esque alguien	#
-# lo lee (cosa que dudo).							#
-# INCLUDE; añade todos los .c y .h al ejecutable.				#
-# /bin/; es un ejecutable, (el del sistema), esto sirve para evitar renombres.	#
-# $(MAKE) xxx -C; llama a otro make para que se cree antes que este mismo.	#
-# $@; variabble que guarda el valor detras de los dos puntos ($xxx : ...)	#
-# $^; variable que guarda TODO despues de los dos puntos (... : $xxx $xxx)	#
-#										#
-# Si se ejecuta bien este make, deberian salir 3 nuevos archivos:		#
-# Carpeta "objects/"; guarda los objetos de este directorio.			#
-# Archivador "libft.a"; es un archivo con los obj del libft para compilar.	#
-# Ejecutable "pushswap"; es el programa que no depende de nada por los INCLUDE	#
-
+# Se viene texto, para ver si me ayuda a entenderlo y tambien si esque alguien #
+# lo lee (cosa que dudo).                                                      #
+# INCLUDE; añade todos los .c y .h al ejecutable.                              #
+# /bin/; es un ejecutable, (el del sistema), esto sirve para evitar renombres. #
+# $(MAKE) xxx -C; llama a otro make para que se cree antes que este mismo.     #
+# $@; variabble que guarda el valor detras de los dos puntos ($xxx : ...)      #
+# $^; variable que guarda TODO despues de los dos puntos (... : $xxx $xxx)     #
+# Si se ejecuta bien este make, deberian salir 3 nuevos archivos:              #
+# Carpeta "objects/"; guarda los objetos de este directorio.                   #
+# Archivador "libft.a"; es un archivo con los obj del libft para compilar.     #
+# Ejecutable "pushswap"; es el programa que no depende de nada por los INCLUDE #
 
 
 NAME		=	push_swap
@@ -48,7 +46,7 @@ $(NAME)	:	${OBJS} $(LIB)
 	@echo "Compiling push swap..."
 	@$(CC) $(CFLAGS) -o $@ $^
 	@mkdir $(OBJS_DIR)
-        @/bin/mv $(OBJS) $(OBJS_DIR)
+	@/bin/mv $(OBJS) $(OBJS_DIR)
 	@echo "Done !"
 	
 $(LIB)	:

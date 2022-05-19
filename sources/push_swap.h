@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:42:09 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 18:37:09 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:00:50 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	check_duplicate(t_stack **a);
 int		check_atoi(const char *str);
 void	check_is_number(char **split);
 /*Operaciones ejecutables*/
-void	p_stack(t_stack **a, t_stack **b);
-void	s_stack(t_stack **top);
-void	r_stack(t_stack **stack);
+void	p_stack(t_stack **a, t_stack **b, char c);
+void	s_stack(t_stack **top, char c);
+void	r_stack(t_stack **stack, char c);
 void	r_rboth(t_stack **a, t_stack **b);
-void	rr_stack(t_stack **stack);
+void	rr_stack(t_stack **stack, char c);
 void	rr_rboth(t_stack **a, t_stack **b);
 /*Funciones de calculo*/
 void	search_min_max(t_parameters **parameters, t_stack **a);

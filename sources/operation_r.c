@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:36:19 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 18:16:22 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:42:19 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -26,7 +26,7 @@
 ** guardado "NULL" e ira a NULL.
 */
 
-void	r_stack(t_stack **stack)
+void	r_stack(t_stack **stack, char c)
 {
 	t_stack	*tmp;
 
@@ -34,12 +34,17 @@ void	r_stack(t_stack **stack)
 	(*stack) = (*stack)->next;
 	tmp->next = NULL;
 	ft_stkadd_back(stack, tmp);
+	if (c == 'a')
+		write(1, "ra\n", 3);
+	else
+		write(1, "rb\n", 3);
 }
 
 void	r_rboth(t_stack **a, t_stack **b)
 {
-	r_stack(a);
-	r_stack(b);
+	r_stack(a, 'a');
+	r_stack(b, 'b');
+	write(1, "rr\n", 3);
 }
 
 /*
@@ -59,7 +64,7 @@ void	r_rboth(t_stack **a, t_stack **b)
 ** 123 y (null) apuntando a NULL
 */
 
-void	rr_stack(t_stack **stack)
+void	rr_stack(t_stack **stack, char c)
 {
 	t_stack	*tmp;
 	t_stack	*stack_tmp;
@@ -70,10 +75,15 @@ void	rr_stack(t_stack **stack)
 	tmp = stack_tmp->next;
 	stack_tmp->next = NULL;
 	ft_stkadd_front(stack, tmp);
+	if (c == 'a')
+		write(1, "rra\n", 4);
+	else
+		write(1, "rrb\n", 4);
 }
 
 void	rr_rboth(t_stack **a, t_stack **b)
 {
-	rr_stack(a);
-	rr_stack(b);
+	rr_stack(a, 'a');
+	rr_stack(b, 'b');
+	write(1, "rrr\n", 4);
 }

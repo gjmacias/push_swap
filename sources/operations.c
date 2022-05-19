@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:41:39 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 18:16:07 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:19:10 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,41 @@
 
 void	order(t_stack **a, t_stack **b, t_parameters *parameters)
 {
-	search_min_max(&(parameters), b);
-	if (calculus(parameters, b) == 0)
+	while ((*b) != NULL)
 	{
-		while ((*b)->number != parameters->max)
-			r_stack(b);
+		write(1, "1", 1);
+		p_stack(a, b, 'b');
 	}
-	else
+	search_min_max(&(parameters), a);
+	while ((*a)->number != parameters->max)
 	{
-		while ((*b)->number != parameters->max)
-			rr_stack(b);
+		if (calculus(parameters, a) == 0)
+			r_stack(a, 'a');
+		else
+			rr_stack(a, 'a');
 	}
-	while (*b)
-		p_stack(b, a);
 }
 
-void	p_stack(t_stack **a, t_stack **b)
+void	p_stack(t_stack **a, t_stack **b, char c)
 {
 	t_stack	*tmp;
 
 	tmp = (t_stack *) malloc(sizeof(t_stack));
 	if (tmp == NULL)
 		ft_error(1);
-	if (*b == NULL)
-	{
-		(*b) = (t_stack *) malloc(sizeof(t_stack));
-		if ((*b) == NULL)
-			ft_error(1);
-		(*b)->number = (*a)->number;
-		(*b)->next = NULL;
-		tmp = (*a);
-		(*a) = (*a)->next;
-	}
+	tmp->number = (*a)->number;
+	tmp->next = NULL;
+	ft_stkadd_front(b, tmp);
+	tmp = (*a);
+	(*a) = (*a)->next;
+	if (c == 'a')
+		write(1, "pa\n", 3);
 	else
-	{
-		tmp->number = (*a)->number;
-		tmp->next = NULL;
-		ft_stkadd_front(b, tmp);
-		tmp = (*a);
-		(*a) = (*a)->next;
-	}
+		write(1, "pb\n", 3);
 	free(tmp);
 }
 
-void	s_stack(t_stack **top)
+void	s_stack(t_stack **top, char c)
 {
 	int	tmp;
 
@@ -67,10 +58,15 @@ void	s_stack(t_stack **top)
 		(*top)->number = (*top)->next->number;
 		(*top)->next->number = tmp;
 	}
+	if (c == 'a')
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
 }
 
 void	ss_stack(t_stack **a, t_stack **b)
 {
-	s_stack(a);
-	s_stack(b);
+	s_stack(a, 'a');
+	s_stack(b, 'b');
+	write(1, "ss\n", 3);
 }

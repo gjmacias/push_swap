@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:33:00 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 18:36:38 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:28:19 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -75,16 +75,15 @@ int	check_atoi(const char *str)
 		|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
 		i++;
 	sign = ft_sign((char *)&str[i]);
-	while (str[i] == '+' || str [i] == '-')
+	if (str[i] == '+' || str [i] == '-')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return (0);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		num = (num * 10) + (str[i] - '0');
-		if (num > INT_MAX || num < INT_MIN)
+		if (num > INT_MAX || (sign * num) < INT_MIN || str[++i] == ' ')
 			return (0);
-		i++;
 	}
 	return (42);
 }

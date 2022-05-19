@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:44:48 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/16 16:52:04 by gmacias-         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:18:35 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,26 +110,26 @@ void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 	search_min_max(&(parameters), a);
 	while (check_order(a, parameters->length) != 0)
 	{
-		if (!a)
+		if (parameters->length_a == 2 && (*a)->number == parameters->max)
 		{
 			order(a, b, parameters);
 			break ;
 		}
 		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
 		{
-			p_stack(a, b);
+			p_stack(a, b, 'a');
 			if ((*b)->number == parameters->max
 				&& (*b)->number != parameters->min)
-				r_stack(b);
+				r_stack(b, 'b');
 			if (*a)
 				search_min_max(&(parameters), a);
 		}
 		else
 		{
 			if (calculus(parameters, a) == 0)
-				r_stack(a);
+				r_stack(a, 'a');
 			else
-				rr_stack(a);
+				rr_stack(a, 'a');
 		}
 	}
 }
