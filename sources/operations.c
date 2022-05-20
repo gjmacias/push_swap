@@ -70,7 +70,7 @@ void	order_3(t_stack **a, t_parameters *parameters)
 		|| tmp->number != parameters->max) && ++i != 3)
 	{
 		if ((*a)->number != parameters->min
-		&& (*a)->number != parameters->max
+		    && (*a)->number != parameters->max
 		    && tmp->number == parameters->min)
 			rr_stack(a, 'a');
 		else if ((*a)->number == parameters->max
