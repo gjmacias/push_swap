@@ -113,6 +113,7 @@ void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 		if (parameters->length_a <= 3)
 		{
 			order_3(a, parameters);
+			order(a, b, parameters);
 			break ;
 		}
 		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
