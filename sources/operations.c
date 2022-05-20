@@ -12,23 +12,6 @@
 
 #include "push_swap.h"
 
-void	order(t_stack **a, t_stack **b, t_parameters *parameters)
-{
-	while ((*b) != NULL)
-	{
-		write(1, "1", 1);
-		p_stack(a, b, 'b');
-	}
-	search_min_max(&(parameters), a);
-	while ((*a)->number != parameters->max)
-	{
-		if (calculus(parameters, a) == 0)
-			r_stack(a, 'a');
-		else
-			rr_stack(a, 'a');
-	}
-}
-
 void	p_stack(t_stack **a, t_stack **b, char c)
 {
 	t_stack	*tmp;
@@ -69,4 +52,48 @@ void	ss_stack(t_stack **a, t_stack **b)
 	s_stack(a, 'a');
 	s_stack(b, 'b');
 	write(1, "ss\n", 3);
+}
+
+void	order_3(t_stack **a, t_parameters *parameters)
+{
+	t_stack	*tmp;
+	int i;
+	
+	i = 0;
+	if (parameters->length_a == 2)
+	{
+		r_stack(a, 'a');
+		return ;
+	}
+	tmp = (*a)->next->next;
+	while (((*a)->number != parameters->min
+		|| tmp->number != parameters->max) && ++i != 3)
+	{
+		if ((*a)->number != parameters->min
+		&& (*a)->number != parameters->max
+		    && tmp->number == parameters->min)
+			rr_stack(a, 'a');
+		else if ((*a)->number == parameters->max
+		&& tmp->number != parameters->min
+		    && tmp->number != parameters->max)
+			r_stack(a, 'a');
+		else
+			s_stack(a, 'a');		
+	}
+}
+
+void	order(t_stack **a, t_stack **b, t_parameters *parameters)
+{
+	while ((*b) != NULL)
+	{
+		p_stack(b, a, 'b');
+	}
+	search_min_max(&(parameters), a);
+	while ((*a)->number != parameters->min)
+	{
+		if (calculus(parameters, a) == 0)
+			r_stack(a, 'a');
+		else
+			rr_stack(a, 'a');
+	}
 }
