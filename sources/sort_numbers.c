@@ -110,19 +110,18 @@ void	sort_numbers(t_stack **a, t_stack **b, t_parameters *parameters)
 	search_min_max(&(parameters), a);
 	while (check_order(a, parameters->length) != 0)
 	{
-		if (parameters->length_a == 2 && (*a)->number == parameters->max)
+		if (parameters->length_a <= 3)
 		{
-			order(a, b, parameters);
+			order_3(a, parameters);
 			break ;
 		}
 		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
 		{
 			p_stack(a, b, 'a');
 			if ((*b)->number == parameters->max
-				&& (*b)->number != parameters->min)
+				&& parameters->length != parameters->length_a)
 				r_stack(b, 'b');
-			if (*a)
-				search_min_max(&(parameters), a);
+			search_min_max(&(parameters), a);
 		}
 		else
 		{
