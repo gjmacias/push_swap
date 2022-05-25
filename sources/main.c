@@ -47,6 +47,7 @@ void	push_swap(t_parameters *parameters, char **arguments)
 	parameters->b = NULL;
 	parameters->length = check_length(&parameters->a);
 	parameters->length_a = check_length(&parameters->a);
+	make_perfection(&parameters->perfection, &parameters->a, parameters);
 	sort_numbers(&(parameters->a), &(parameters->b), parameters);
 }
 
@@ -60,7 +61,7 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	parameters->line = NULL;
 	parameters->split = NULL;
 	parameters->length = 0;
-	parameters->print = 0;
+	parameters->my_chunk = 1;
 	return (parameters);
 }
 
