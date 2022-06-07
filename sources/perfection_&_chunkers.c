@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void make_a_chunkers(t_stack **perfection, t_stack **a)
+void	make_a_chunkers(t_stack **perfection, t_stack **a)
 {
 	t_stack	*tmp[2];
 
@@ -29,7 +29,7 @@ void make_a_chunkers(t_stack **perfection, t_stack **a)
 	}
 }
 
-void make_position_and_chunkers(t_stack **perfection, t_parameters *parameters)
+void	make_position_and_chunkers(t_stack **perfection, t_parameters *parameters)
 {
 	int	i;
 	int	const_chunker;
@@ -50,10 +50,10 @@ void make_position_and_chunkers(t_stack **perfection, t_parameters *parameters)
 		tmp = tmp->next;
 	}
 	tmp->chunker = ((tmp->position + const_chunker) / const_chunker);
-	parameters->max_chunk =((tmp->position + const_chunker) / const_chunker);
+	parameters->max_chunk = tmp->chunker;
 }
 
-void make_perfection(t_stack **perfection, t_stack **a, t_parameters *parameters)
+void	make_perfection(t_stack **perfection, t_stack **a, t_parameters *parameters)
 {
 	t_stack *tmp[3];
 	
