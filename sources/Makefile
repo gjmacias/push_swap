@@ -54,7 +54,7 @@ $(LIB)	:
 	@echo "Moving libft.a into this directory..."
 	@/bin/mv $(LIB_DIR)$(LIB) .
 
-clean	:
+clean :
 	@echo "Removing push swap and libft objects..."
 	@$(MAKE) clean -C $(LIB_DIR)
 	@${RM} ${OBJS_DIR}
