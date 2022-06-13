@@ -32,9 +32,8 @@ void	make_a_chunkers(t_stack **perfection, t_stack **a)
 void	make_position_and_chunkers(t_stack **perfection, t_parameters *parameters)
 {
 	int	i;
-	int	const_chunker;
 	t_stack	*tmp;
-	
+
 	i = 0;
 	constant_chunker = 10;
 	tmp = *perfection;
@@ -46,10 +45,12 @@ void	make_position_and_chunkers(t_stack **perfection, t_parameters *parameters)
 	tmp = *perfection;
 	while (tmp)
 	{
-		tmp->chunker = ((tmp->position + const_chunker) / const_chunker);
+		tmp->chunker = ((tmp->position + parameters->const_chunker)
+			/ parameters->const_chunker);
 		tmp = tmp->next;
 	}
-	tmp->chunker = ((tmp->position + const_chunker) / const_chunker);
+	tmp->chunker = ((tmp->position + parameters->const_chunker)
+		/ parameters->const_chunker);
 	parameters->max_chunk = tmp->chunker;
 }
 
