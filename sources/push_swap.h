@@ -35,6 +35,7 @@ typedef struct s_parameters
 	int		max_pos;
 	int		my_chunk;
 	int		max_chunk;
+	int		const_chunker;
 	t_stack	*a;
 	t_stack	*b;
 	t_stack *perfection;
