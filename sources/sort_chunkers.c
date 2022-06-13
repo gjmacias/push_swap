@@ -12,58 +12,107 @@
 
 #include "push_swap.h"
 
-void	search_min_max(t_parameters **parameters, t_stack **a)
+int	check_chunk(t_parameters *parameters, t_stack **a)
 {
-	int		pos;
+	t_stack	*tmp;
+	int		is;
+	
+	is = false;
+	tmp = (*a);
+	while (tmp)
+	{
+		if (parameters->my_chunk == (*a)->chunker)
+			is = true;
+		tmp = tmp->next;
+	}
+	return (is);	
+}
+
+/*
+** i[0] = down		el mas cercano bajando
+** i[1] = position	posicion del stack
+** i[2] = block		bloquear el cercano
+** i[3] = up		el mas cercano subiendo
+**
+** ACLARACION: "down" significa que tu estas en la posicion ej: 5 y tienes 
+** que ir a la 3. en ese caso tendras que hacer 'rra' para ir abajo del stack.
+** "up" significa que tu estas en el 5 y quieres subir al 8, deberas hacer
+** 'ra' porque quieres seguir avanzando en el stack.
+*/
+
+void	search_up_down(t_parameters *parameters, t_stack **a)
+{
+	int		i[4];
 	t_stack	*tmp;
 
-	pos = 0;
+	i[1] = 0;
+	i[2] = false;
 	tmp = (*a);
-	(*parameters)->max = (tmp)->number;
-	(*parameters)->min = (tmp)->number;
-	(*parameters)->length_a = check_length(a);
 	while ((tmp) != NULL)
 	{
-		(tmp)->position = ++pos;
-		if ((tmp)->number <= (*parameters)->min)
+		i[1]++;
+ 		if (parameters->my_chunk == (*a)->chunker)
 		{
-			(*parameters)->min = (tmp)->number;
-			(*parameters)->min_pos = (tmp)->position;
-		}
-		if ((tmp)->number >= (*parameters)->max)
-		{
-			(*parameters)->max = (tmp)->number;
-			(*parameters)->max_pos = (tmp)->position;
+			if (i[2] == false)
+			{
+				i[3] = i[1];
+				i[2] = true;
+			}
+			i[0] = i[1];
 		}
 		(tmp) = ((tmp)->next);
+	}
+	if ((i[1] - i[0]) <= i[3])
+		rr_stack(a, 'a');
+	else
+		r_stack(a, 'a');
+}
+
+void	chunker_on_stack(t_stack **a, t_stack **b, t_parameters *parameters)
+{
+	while (check_chunk == true)
+	{
+		if ((*a)->chunker == parameters->my_chunk)
+			p_stack(a, b, 'b');
+		else
+			search_up_down(parameters, a);
 	}
 }
 
 void	sort_chunkers(t_stack **a, t_stack **b, t_parameters *parameters)
 {
-	search_min_max(&(parameters), a);
-	while (check_order(a, parameters->length) != 0)
+	int	next_chunk;
+
+	next_chunk = false;
+	while (parameters->my_chunk++ != max_chunk)
 	{
-		if (parameters->length_a <= 3)
+		chunker_on_stack(a, b, parameters);
+		while (next_chunk != true)
 		{
-			order_3(a, parameters);
-			order(a, b, parameters);
-			break ;
-		}
-		if ((*a)->number == parameters->min || (*a)->number == parameters->max)
-		{
-			p_stack(a, b, 'a');
-			if ((*b)->number == parameters->max
-				&& parameters->length != parameters->length_a)
-				r_stack(b, 'b');
-			search_min_max(&(parameters), a);
-		}
-		else
-		{
-			if (calculus(parameters, a) == 0)
-				r_stack(a, 'a');
+			if (check_chunk == false)
+			{
+				order(b, a, parameters);
+				next_chunk = true;
+			}
+			if ((*b)->number == parameters->min || (*b)->number == parameters->max)
+			{
+				p_stack(b, a, 'b');
+				if ((*a)->number == parameters->max
+					&& parameters->length != parameters->length_a)
+					r_stack(a, 'a');
+				search_min_max(&(parameters), b);
+			}
 			else
-				rr_stack(a, 'a');
+			{/*
+				if (calculus(parameters, a) == 0)
+					r_stack(a, 'a');
+				else
+					rr_stack(a, 'a');
+			
+			todo esto se puede quitar y que lo haga la funcion que le pertoque*/
+			
+			}
 		}
+		next_chunk = false;
 	}
 }
