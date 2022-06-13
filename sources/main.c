@@ -65,6 +65,7 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	parameters->split = NULL;
 	parameters->length = 0;
 	parameters->my_chunk = 1;
+	parameters->const_chunker = 31;
 	return (parameters);
 }
 
