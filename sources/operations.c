@@ -18,7 +18,7 @@ void	p_stack(t_stack **a, t_stack **b, char c)
 
 	tmp = (t_stack *) malloc(sizeof(t_stack));
 	if (tmp == NULL)
-		ft_error(1);
+		ft_error(0);
 	tmp->number = (*a)->number;
 	tmp->next = NULL;
 	ft_stkadd_front(b, tmp);
