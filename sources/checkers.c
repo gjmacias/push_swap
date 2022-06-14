@@ -56,7 +56,7 @@ void	check_duplicate(t_stack **a)
 		{
 			if ((tmp1->position != tmp2->position)
 				&& (tmp1->number == tmp2->number))
-				ft_error(3);
+				ft_error(0);
 			tmp2 = tmp2->next;
 		}
 		tmp1 = tmp1->next;
@@ -93,11 +93,11 @@ void	check_is_number(char **split)
 	int	i;
 
 	if (!split[0])
-		ft_error(2);
+		ft_error(0);
 	i = -1;
 	while (split[++i])
 	{
 		if (check_atoi(split[i]) == 0)
-			ft_error(3);
+			ft_error(0);
 	}
 }
