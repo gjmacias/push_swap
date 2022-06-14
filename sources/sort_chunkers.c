@@ -9,13 +9,24 @@
 /*   Updated: 2022/06/07 16:18:35 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "push_swap.h"
 
-int	check_chunk(t_parameters *parameters, t_stack **a)
+void	move_things(t_stack **b, t_parameters *parameters)
+{
+	if (calculus(parameters, b) == 0)
+		r_stack(b, 'b');
+	else
+		rr_stack(b, 'b');
+}
+
+if (calculus(parameters, a) == 0)
+				r_stack(a, 'a');
+			else
+				rr_stack(a, 'a');
+_Bool	check_chunk(t_parameters *parameters, t_stack **a)
 {
 	t_stack	*tmp;
-	int		is;
+	_Bool	is;
 	
 	is = false;
 	tmp = (*a);
@@ -81,7 +92,7 @@ void	chunker_on_stack(t_stack **a, t_stack **b, t_parameters *parameters)
 
 void	sort_chunkers(t_stack **a, t_stack **b, t_parameters *parameters)
 {
-	int	next_chunk;
+	_Bool	next_chunk;
 
 	next_chunk = false;
 	while (parameters->my_chunk++ != max_chunk)
@@ -103,15 +114,7 @@ void	sort_chunkers(t_stack **a, t_stack **b, t_parameters *parameters)
 				search_min_max(&(parameters), b);
 			}
 			else
-			{/*
-				if (calculus(parameters, a) == 0)
-					r_stack(a, 'a');
-				else
-					rr_stack(a, 'a');
-			
-			todo esto se puede quitar y que lo haga la funcion que le pertoque*/
-			
-			}
+				move_things(b, parameters);
 		}
 		next_chunk = false;
 	}
