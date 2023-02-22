@@ -6,7 +6,7 @@
 /*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:41:39 by gmacias-          #+#    #+#             */
-/*   Updated: 2022/05/19 18:19:10 by gmacias-         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:10:38 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	order(t_stack **a, t_stack **b, t_parameters *parameters)
 void	order_3(t_stack **a, t_parameters *parameters)
 {
 	t_stack	*tmp;
-	int i;
-	
+	int		i;
+
 	i = 0;
 	if (parameters->length_a == 2)
 	{
@@ -96,17 +96,17 @@ void	order_3(t_stack **a, t_parameters *parameters)
 	}
 	tmp = (*a)->next->next;
 	while (((*a)->number != parameters->min
-		|| tmp->number != parameters->max) && ++i != 3)
+			|| tmp->number != parameters->max) && ++i != 3)
 	{
 		if ((*a)->number != parameters->min
-		    && (*a)->number != parameters->max
-		    && tmp->number == parameters->min)
+			&& (*a)->number != parameters->max
+			&& tmp->number == parameters->min)
 			rr_stack(a, 'a');
 		else if ((*a)->number == parameters->max
-		&& tmp->number != parameters->min
-		    && tmp->number != parameters->max)
+			&& tmp->number != parameters->min
+			&& tmp->number != parameters->max)
 			r_stack(a, 'a');
 		else
-			s_stack(a, 'a');		
+			s_stack(a, 'a');
 	}
 }
