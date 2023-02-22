@@ -9,34 +9,8 @@
 /*   Updated: 2022/05/19 17:45:58 by gmacias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
-
-t_stack	*fill_stack(t_parameters *parameters, char **split)
-{
-	int		i;
-	t_stack	*tmp;
-
-	i = 0;
-	while (split[i])
-	{
-		tmp = malloc(sizeof(t_stack));
-		if (tmp == NULL)
-			ft_error(0);
-		tmp->number = ft_atoi(split[i++]);
-		tmp->position = i;
-		tmp->next = NULL;
-		ft_stkadd_back(&parameters->a, tmp);
-		tmp = NULL;
-	}
-	free(tmp);
-	return (parameters->a);
-}
-
-char	**fill_split(t_parameters *parameters, char **arguments)
-{
-	parameters->split = &arguments[1];
-	return (parameters->split);
-}
 
 void	push_swap(t_parameters *parameters, char **arguments)
 {
@@ -47,11 +21,7 @@ void	push_swap(t_parameters *parameters, char **arguments)
 	parameters->b = NULL;
 	parameters->length = check_length(&parameters->a);
 	parameters->length_a = check_length(&parameters->a);
-	make_perfection(&parameters->perfection, &parameters->a, parameters);
-	if (parameters->my_chunker != parameters->max_chunker)
-		sort_chunkers(&(parameters->a), &(parameters->b), parameters)
-	else
-		sort_numbers(&(parameters->a), &(parameters->b), parameters);
+	order(parameters);
 }
 
 t_parameters	*ft_init_parameters(t_parameters *parameters)
@@ -59,13 +29,11 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	parameters = (t_parameters *)malloc(sizeof(t_parameters));
 	if (parameters == NULL)
 		ft_error(0);
-	parameters->a = NULL;
-	parameters->b = NULL;
 	parameters->line = NULL;
 	parameters->split = NULL;
 	parameters->length = 0;
-	parameters->my_chunk = 1;
-	parameters->const_chunker = 31;
+	parameters->a = NULL;
+	parameters->b = NULL;
 	return (parameters);
 }
 
