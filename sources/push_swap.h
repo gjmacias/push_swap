@@ -18,7 +18,6 @@ typedef struct s_stack
 {
 	int				number;
 	int				position;
-	int				chunker;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -29,16 +28,9 @@ typedef struct s_parameters
 	char	**arguments;
 	int		length_a;
 	int		length;
-	int		min;
-	int		max;
-	int		min_pos;
-	int		max_pos;
-	int		my_chunk;
-	int		max_chunk;
-	int		const_chunker;
 	t_stack	*a;
 	t_stack	*b;
-	t_stack *perfection;
+	t_stack	*perfection;
 }	t_parameters;
 /*Checkers*/
 int		check_length(t_stack **a);

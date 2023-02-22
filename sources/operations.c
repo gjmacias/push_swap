@@ -53,6 +53,7 @@ void	ss_stack(t_stack **a, t_stack **b)
 	s_stack(b, 'b');
 	write(1, "ss\n", 3);
 }
+<<<<<<< HEAD
 
 void	order(t_stack **a, t_stack **b, t_parameters *parameters)
 {
@@ -110,3 +111,5 @@ void	order_3(t_stack **a, t_parameters *parameters)
 			s_stack(a, 'a');
 	}
 }
+=======
+>>>>>>> 98b83dc08a93166c5380cb224245d039121d9b4e
