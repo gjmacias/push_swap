@@ -33,10 +33,14 @@ void	fill_position(t_stack **a)
 	int		i;
 	t_stack	*tmp;
 
+	if (!(*a))
+		return;
 	i = 0;
 	tmp = (*a);
-	while (tmp->next)
+	while (tmp)
+	{
 		tmp->position = ++i;
+		tmp = tmp->next;
+	}
 	tmp = NULL;
-	free(tmp);
 }
