@@ -27,3 +27,16 @@ char	**fill_split(t_parameters *parameters, char **arguments)
 	parameters->split = &arguments[1];
 	return (parameters->split);
 }
+
+void	fill_position(t_stack **a)
+{
+	int		i;
+	t_stack	*tmp;
+
+	i = 0;
+	tmp = (*a);
+	while (tmp->next)
+		tmp->position = ++i;
+	tmp = NULL;
+	free(tmp);
+}
