@@ -23,6 +23,7 @@ int	check_length(t_stack **a)
 		len ++;
 		(tmp) = (tmp)->next;
 	}
+	tmp = NULL;
 	return (len);
 }
 
