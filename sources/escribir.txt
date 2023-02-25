@@ -1,0 +1,7 @@
+        500     300
+    r   201     200
+    rr  302     100
+
+    r = max(ra, rb)                 //201
+    rr = max(rra, rrb)              //302
+    mix = max(rra + rb || ra + rrb) //502 || 302

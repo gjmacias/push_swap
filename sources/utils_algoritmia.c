@@ -18,6 +18,21 @@ int	ft_min(t_stack **b)
 	return (min);
 }
 
+int	ft_min_array(int *array)
+{
+	int	result;
+	int	i;
+
+	result = INT_MAX;
+	i = -1;
+	while (array[++i])
+	{
+		if (array[i] < result)
+			result = array[i];
+	}
+	return (result);
+}
+
 int	ft_max(t_stack **b)
 {
 	t_stack	*tmp;
@@ -35,23 +50,20 @@ int	ft_max(t_stack **b)
 	return (max);
 }
 
+int	ft_max_int(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	else
+		return (b);
+}
+
 int	ft_last(t_stack **b)
 {
 	t_stack	*tmp;
 
 	tmp = (*b);
-	while (tmp)
+	while (tmp->next)
 		(tmp) = (tmp)->next;
 	return (tmp->number);
-}
-
-void    start_algoritmia(t_algoritmia *algoritmia, t_stack **b)
-{
-    algoritmia->length_b = check_length(b);
-    algoritmia->last_b = ft_last(b);
-    algoritmia->max_b = ft_max(b);
-    algoritmia->min_b = ft_min(b);
-    algoritmia->moves_b = 0;
-	algoritmia->less_moves = INT_MAX;
-    algoritmia->position = 0;
 }

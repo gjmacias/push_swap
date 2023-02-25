@@ -12,16 +12,21 @@
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
 //# include "../libft/libft.h"
 
 typedef struct s_algoritmia
 {
-	int		length_b;
 	int		last_b;
 	int		min_b;
 	int		max_b;
+	int		moves_b_ra;
+	int		moves_b_rra;
+	int		moves_a_ra;
+	int		moves_a_rra;
+	int		moves_a;
 	int		moves_b;
 	int		less_moves;
 	int		position;
@@ -60,8 +65,13 @@ void	rr_stack(t_stack **stack, char c);
 void	rr_rboth(t_stack **a, t_stack **b);
 void	ft_stkadd_front(t_stack **stack, t_stack *new);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
-/*Funciones de calculo*/
+/*Funciones de algoritmia*/
+int		ft_min(t_stack **b);
+int		ft_min_array(int *array);
+int		ft_max(t_stack **b);
+int		ft_max_int(int a, int b);
+int		ft_last(t_stack **b);
 
 /*tests*/
-int ft_error(int num);
+int		ft_error(int num);
 #endif

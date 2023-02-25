@@ -12,6 +12,21 @@
 
 #include "push_swap.h"
 
+void	start_algoritmia(t_algoritmia *algoritmia, t_stack **b)
+{
+	algoritmia->last_b = ft_last(b);
+	algoritmia->max_b = ft_max(b);
+	algoritmia->min_b = ft_min(b);
+	algoritmia->moves_b_ra = 0;
+	algoritmia->moves_b_rra = 0;
+	algoritmia->moves_a_ra = 0;
+	algoritmia->moves_a_rra = 0;
+	algoritmia->moves_a = 0;
+	algoritmia->moves_b = 0;
+	algoritmia->less_moves = INT_MAX;
+	algoritmia->position = 0;
+}
+
 void	push_swap(t_parameters *parameters, char **arguments)
 {
 	parameters->split = fill_split(parameters, arguments);
