@@ -54,16 +54,17 @@ int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
 	int	option[4];
 	int	result;
 
-	algoritmia->moves_a_rra = check_length(a) - algoritmia->moves_a_ra;
-	algoritmia->moves_b_rra = check_length(b) - algoritmia->moves_b_ra + 2;
+	algoritmia->moves_a_rra = check_length(a) - algoritmia->moves_a_ra + 2;
+	algoritmia->moves_b_rra = check_length(b) - algoritmia->moves_b_ra;
 	option[0] = ft_max_int(algoritmia->moves_a_ra, algoritmia->moves_b_ra);
 	option[1] = ft_max_int(algoritmia->moves_a_rra, algoritmia->moves_b_rra);
 	option[2] = algoritmia->moves_a_ra + algoritmia->moves_b_rra;
 	option[3] = algoritmia->moves_a_rra + algoritmia->moves_b_ra;
-    printf("Position: %d\n",
-    printf("Position: %d\n",
-    printf("Position: %d\n",
-    printf("Position: %d\n",
+    printf("Moves: %d, %d, %d, %d\n",algoritmia->moves_a_ra,algoritmia->moves_a_rra,algoritmia->moves_b_ra,algoritmia->moves_b_rra);
+	printf("Position: %d\n",option[0]);
+    printf("Position: %d\n",option[1]);
+    printf("Position: %d\n",option[2]);
+    printf("Position: %d\n",option[3]);
 	result = ft_min_array(option);
 	if (result < algoritmia->less_moves)
 	{
@@ -77,47 +78,42 @@ int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
 			algoritmia->moves_b = -(algoritmia->moves_a_rra);
 		algoritmia->less_moves = result;
 	}
+	algoritmia->last_b = ft_last(b);
     printf("\n");
 	return (algoritmia->less_moves);
 }
 
-int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *algoritmia)
+int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
 {
-	t_stack			*tmp_a;
-	t_stack			*tmp_b;
+	t_stack			*tmp[2];
 	int				moves;
-    int             minmax;
-    int             tmp_b_last;
 
-    tmp_b_last = algoritmia->last_b;
-	tmp_a = (*a);
-	while (tmp_a)
+	tmp[0] = (*a);
+	while (tmp[0])
 	{
-        minmax = (tmp_a->number > algoritmia->max_b || tmp_a->number < algoritmia->min_b);
-		tmp_b = (*b);
-        tmp_b_last = algoritmia->last_b;
+		tmp[1] = (*b);
 		moves = 0;
-        printf(" a: %d,", tmp_a->number);
-		while ((minmax && (tmp_b->number != algoritmia->max_b))
-			|| (!(minmax) && (tmp_a->number < tmp_b->number 
-                || tmp_a->number > tmp_b_last)))
+        printf(" a: %d,", tmp[0]->number);
+		while (((tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
+				&& (tmp[1]->number != al->max_b))
+			|| (tmp[0]->number > tmp[1]->number && tmp[0]->number < al->last_b))
 		{
-            tmp_b_last = tmp_b->number;
-			tmp_b = tmp_b->next;
+			al->last_b = tmp[1]->number;
+			tmp[1] = tmp[1]->next;
 			moves++;
-        }
-        printf(" b: %d,", tmp_b->number);
+		}
+        printf(" b: %d,", tmp[1]->number);
         printf(" moves: %d, ", moves);
-        algoritmia->moves_b_ra = moves;
-		algoritmia->moves_a_ra = tmp_a->position;
-        printf(" position: %d\n", tmp_a->position);
-		moves = algoritmia->less_moves;
-		if (search_less_moves(algoritmia, a, b) < moves)
-		 	algoritmia->position = tmp_a->position;
-		tmp_a = tmp_a->next;
+		al->moves_b_ra = moves;
+		al->moves_a_ra = tmp[0]->position;
+        printf(" position: %d\n", tmp[0]->position);
+		moves = al->less_moves;
+		if (search_less_moves(al, a, b) < moves)
+			al->position = tmp[0]->position;
+		tmp[0] = tmp[0]->next;
 	}
     printf("\n");
-	return (algoritmia->position);
+	return (al->position);
 }
 
 int main()

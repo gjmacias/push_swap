@@ -25,7 +25,7 @@ int	ft_min_array(int *array)
 
 	result = INT_MAX;
 	i = -1;
-	while (array[++i])
+	while (++i != 4)
 	{
 		if (array[i] < result)
 			result = array[i];
