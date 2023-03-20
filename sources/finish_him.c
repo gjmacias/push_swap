@@ -1,11 +1,11 @@
 
 #include "push_swap.h"
 
-void	end_search(t_stack **a, int min)
+int	end_search(t_stack **a, int min)
 {
-	int	tmp;
-	int	moves;
-	int	moves2
+	t_stack	*tmp;
+	int		moves;
+	int		moves2;
 
 	tmp = (*a);
 	moves = 0;
@@ -42,11 +42,11 @@ void finish_him(t_parameters *parameters)
 	if (move > 0)
 	{
 		while (--move >= 0)
-			r_stack(a, 'a');
+			r_stack(&parameters->a, 'a');
 	}
 	else
 	{
 		while ( ++move <= 0)
-			rr_stack(a, 'a');
+			rr_stack(&parameters->a, 'a');
 	}
 }
