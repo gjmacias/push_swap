@@ -9,7 +9,7 @@ int	end_search(t_stack **a, int min)
 
 	tmp = (*a);
 	moves = 0;
-	while (tmp->number = min)
+	while (tmp->number == min)
 	{
 		tmp = tmp->next;
 		moves++;
@@ -21,7 +21,7 @@ int	end_search(t_stack **a, int min)
 		return (-moves2);
 }
 
-void finish_him(t_parameters *parameters)
+void	finish_him(t_parameters *parameters)
 {
 	int	tmp;
 	int	move;
@@ -46,7 +46,7 @@ void finish_him(t_parameters *parameters)
 	}
 	else
 	{
-		while ( ++move <= 0)
+		while (++move <= 0)
 			rr_stack(&parameters->a, 'a');
 	}
 }

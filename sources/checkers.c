@@ -52,11 +52,10 @@ void	check_duplicate(t_stack **a)
 	tmp1 = (*a);
 	while (tmp1)
 	{
-		tmp2 = tmp1;
+		tmp2 = tmp1->next;
 		while (tmp2)
 		{
-			if ((tmp1->position != tmp2->position)
-				&& (tmp1->number == tmp2->number))
+			if (tmp1->number == tmp2->number)
 				ft_error(0);
 			tmp2 = tmp2->next;
 		}
@@ -76,7 +75,7 @@ int	check_atoi(const char *str)
 		|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
 		i++;
 	sign = ft_sign((char *)&str[i]);
-	if (str[i] == '+' || str [i] == '-')
+	while (str[i] == '+' || str [i] == '-')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return (0);

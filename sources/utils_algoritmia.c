@@ -6,6 +6,8 @@ int	ft_min(t_stack **b)
 	t_stack	*tmp;
 	int		min;
 
+	if (*b == NULL)
+		return (0);
 	tmp = (*b);
 	min = tmp->number;
 	while (tmp)
@@ -38,6 +40,8 @@ int	ft_max(t_stack **b)
 	t_stack	*tmp;
 	int		max;
 
+	if (*b == NULL)
+		return (0);
 	tmp = (*b);
 	max = tmp->number;
 	while (tmp)
@@ -61,7 +65,8 @@ int	ft_max_int(int a, int b)
 int	ft_last(t_stack **b)
 {
 	t_stack	*tmp;
-
+	if (*b == NULL)
+		return (0);
 	tmp = (*b);
 	while (tmp->next)
 		(tmp) = (tmp)->next;

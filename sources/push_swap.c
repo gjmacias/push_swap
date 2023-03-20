@@ -12,11 +12,13 @@
 
 #include "push_swap.h"
 
-void	start_algoritmia(t_algoritmia *algoritmia, t_stack **b)
+void	start_algoritmia(t_algoritmia *algoritmia, t_parameters *p)
 {
-	algoritmia->last_b = ft_last(b);
-	algoritmia->max_b = ft_max(b);
-	algoritmia->min_b = ft_min(b);
+	if ((p->b) == NULL)
+		p_stack(&p->a, &p->b,'b');
+	algoritmia->last_b = ft_last(&p->b);
+	algoritmia->max_b = ft_max(&p->b);
+	algoritmia->min_b = ft_min(&p->b);
 	algoritmia->moves_b_ra = 0;
 	algoritmia->moves_b_rra = 0;
 	algoritmia->moves_a_ra = 0;
@@ -27,6 +29,7 @@ void	start_algoritmia(t_algoritmia *algoritmia, t_stack **b)
 	algoritmia->position = 0;
 }
 
+/*
 void	push_swap(t_parameters *parameters, char **arguments)
 {
 	parameters->split = fill_split(parameters, arguments);
@@ -38,6 +41,7 @@ void	push_swap(t_parameters *parameters, char **arguments)
 	parameters->length_a = check_length(&parameters->a);
 	order(parameters);
 }
+*/
 
 t_parameters	*ft_init_parameters(t_parameters *parameters)
 {
@@ -52,6 +56,7 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	return (parameters);
 }
 
+/*
 int	main(int nword, char *arguments[])
 {
 	t_parameters	*parameters;
@@ -65,3 +70,4 @@ int	main(int nword, char *arguments[])
 	parameters = NULL;
 	exit(EXIT_SUCCESS);
 }
+*/

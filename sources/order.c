@@ -73,34 +73,34 @@ void	make_position(int position, t_algoritmia *alg, t_parameters *param)
 	if (alg->moves_a > 1 && alg->moves_b > 0)
 	{
 		while (alg->moves_b-- != 0 || alg->moves_a-- != 1)
-			r_rboth(param->a, param->b);
+			r_rboth(&param->a, &param->b);
 	}
 	else if (alg->moves_a < -1 && alg->moves_b < 0)
 	{
 		while (alg->moves_b++ != 0 || alg->moves_a++ != -1)
-			rr_rboth(param->a, param->b);
+			rr_rboth(&param->a, &param->b);
 	}
 	if (alg->moves_a > 1)
 	{
 		while (alg->moves_a-- != 1)
-			r_stack(param->a, 'a');
+			r_stack(&param->a, 'a');
 	}
 	else if (alg->moves_a < -1)
 	{
 		while (alg->moves_a++ != -1)
-			rr_stack(param->a, 'a');
+			rr_stack(&param->a, 'a');
 	}
 	if (alg->moves_b > 0)
 	{
 		while (alg->moves_b-- != 0)
-			r_stack(param->b, 'b');
+			r_stack(&param->b, 'b');
 	}
 	else if (alg->moves_b < 0)
 	{
 		while (alg->moves_b++ != 0)
-			rr_stack(param->b, 'b');
+			rr_stack(&param->b, 'b');
 	}
-	p_stack(param->a, param->b, 'a');
+	p_stack(&param->a, &param->b, 'b');
 }
 
 /*
@@ -124,7 +124,7 @@ int	order_3(t_stack **a, int min, int max)
 	if (check_length(a) == 2 && (*a)->number > tmp->number)
 	{
 		r_stack(a, 'a');
-		return ;
+		return (1);
 	}
 	tmp = tmp->next;
 	while (!((*a)->number == min && tmp->number == max))
@@ -144,6 +144,7 @@ int	order_3(t_stack **a, int min, int max)
 	return (1);
 }
 
+/*
 void	order(t_parameters *parameters)
 {
 	t_algoritmia	*algoritmia;
@@ -156,17 +157,18 @@ void	order(t_parameters *parameters)
 	while (check_order(&parameters->a, parameters->length) != 0)
 	{
 		if (parameters->length <= 3)
-			reverse = order_3(&parameters->a, ft_min(parameters->a),
-					ft_max(parameters->a));
+			reverse = order_3(&parameters->a, ft_min(&parameters->a),
+					ft_max(&parameters->a));
 		else if (reverse == 1)
 			finish_him(parameters);
 		else
 		{
-			start_algortimia(algoritmia, parameters->b);
-			fill_position(parameters->a);
-			fill_position(parameters->b);
-			make_position(search_less_position(parameters->a, parameters->b,
+			start_algoritmia(algoritmia, &parameters->b);
+			fill_position(&parameters->a);
+			fill_position(&parameters->b);
+			make_position(search_less_position(&parameters->a, &parameters->b,
 					algoritmia), algoritmia, parameters);
 		}
 	}
 }
+*/

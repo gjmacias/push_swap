@@ -50,12 +50,18 @@ typedef struct s_parameters
 	t_stack	*b;
 	t_stack	*perfection;
 }	t_parameters;
+
+
 /*Checkers*/
 int		check_length(t_stack **a);
 int		check_order(t_stack **a, int length);
 void	check_duplicate(t_stack **a);
 int		check_atoi(const char *str);
 void	check_is_number(char **split);
+/*Llenado de infomacion*/
+t_stack	*fill_stack(t_parameters *parameters, char **split);
+char	**fill_split(t_parameters *parameters, char **arguments);
+void	fill_position(t_stack **a);
 /*Operaciones ejecutables*/
 void	p_stack(t_stack **a, t_stack **b, char c);
 void	s_stack(t_stack **top, char c);
@@ -65,13 +71,26 @@ void	rr_stack(t_stack **stack, char c);
 void	rr_rboth(t_stack **a, t_stack **b);
 void	ft_stkadd_front(t_stack **stack, t_stack *new);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
-/*Funciones de algoritmia*/
+/*Ordenación*/
+int		search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b);
+int		search_less_position(t_stack **a, t_stack **b, t_algoritmia *al);
+void	make_position(int position, t_algoritmia *alg, t_parameters *param);
+int		order_3(t_stack **a, int min, int max);
+void	order(t_parameters *parameters);
+/*Utiles de algoritmia*/
 int		ft_min(t_stack **b);
 int		ft_min_array(int *array);
 int		ft_max(t_stack **b);
 int		ft_max_int(int a, int b);
 int		ft_last(t_stack **b);
+/*Programa*/
+void	start_algoritmia(t_algoritmia *algoritmia, t_parameters *p);
+void	push_swap(t_parameters *parameters, char **arguments);
+t_parameters	*ft_init_parameters(t_parameters *parameters);
 
 /*tests*/
 int		ft_error(int num);
+void	finish_him(t_parameters *param);
+int	ft_sign(char *str);
+int	ft_atoi(const char *str);
 #endif

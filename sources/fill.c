@@ -44,7 +44,7 @@ void	fill_position(t_stack **a)
 	int		i;
 	t_stack	*tmp;
 
-	if (!(*a))
+	if ((*a) == NULL)
 		return ;
 	i = 0;
 	tmp = (*a);

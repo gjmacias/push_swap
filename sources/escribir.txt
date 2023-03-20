@@ -5,3 +5,7 @@
     r = max(ra, rb)                 //201
     rr = max(rra, rrb)              //302
     mix = max(rra + rb || ra + rrb) //502 || 302
+
+
+
+    gcc test_mposition.c move_stack.c operation_r.c operations.c utils_algoritmia.c
