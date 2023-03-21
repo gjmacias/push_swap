@@ -33,7 +33,7 @@ int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
 		if (result == option[0] || result == option[3])
 			algoritmia->moves_b = algoritmia->moves_b_ra;
 		else
-			algoritmia->moves_b = -(algoritmia->moves_a_rra);
+			algoritmia->moves_b = -(algoritmia->moves_b_rra);
 		algoritmia->less_moves = result;
 	}
 	algoritmia->last_b = ft_last(b);
@@ -52,7 +52,9 @@ int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
 		moves = 0;
 		while (((tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
 				&& (tmp[1]->number != al->max_b))
-			|| (tmp[0]->number > tmp[1]->number && tmp[0]->number < al->last_b))
+			|| (!(tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
+				&& !(tmp[0]->number > tmp[1]->number 
+					&& tmp[0]->number < al->last_b)))
 		{
 			al->last_b = tmp[1]->number;
 			tmp[1] = tmp[1]->next;

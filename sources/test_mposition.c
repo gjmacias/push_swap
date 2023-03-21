@@ -68,7 +68,13 @@ int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
 	option[1] = ft_max_int(algoritmia->moves_a_rra, algoritmia->moves_b_rra);
 	option[2] = algoritmia->moves_a_ra + algoritmia->moves_b_rra;
 	option[3] = algoritmia->moves_a_rra + algoritmia->moves_b_ra;
+	printf("Position: %d\n",option[0]);
+    printf("Position: %d\n",option[1]);
+    printf("Position: %d\n",option[2]);
+    printf("Position: %d\n",option[3]);
 	result = ft_min_array(option);
+	printf("result: %d\n",result);
+	printf("less_moves: %d\n",algoritmia->less_moves);
 	if (result < algoritmia->less_moves)
 	{
 		if (result == option[0] || result == option[2])
@@ -78,7 +84,7 @@ int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
 		if (result == option[0] || result == option[3])
 			algoritmia->moves_b = algoritmia->moves_b_ra;
 		else
-			algoritmia->moves_b = -(algoritmia->moves_a_rra);
+			algoritmia->moves_b = -(algoritmia->moves_b_rra);
 		algoritmia->less_moves = result;
 	}
 	algoritmia->last_b = ft_last(b);
@@ -97,13 +103,13 @@ int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
 		moves = 0;
 		while (((tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
 				&& (tmp[1]->number != al->max_b))
-			|| (tmp[0]->number > tmp[1]->number && tmp[0]->number < al->last_b))
+			|| (!(tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
+				&& !(tmp[0]->number > tmp[1]->number && tmp[0]->number < al->last_b)))
 		{
 			al->last_b = tmp[1]->number;
 			tmp[1] = tmp[1]->next;
 			moves++;
 		}
-
 		al->moves_b_ra = moves;
 		al->moves_a_ra = tmp[0]->position;
 		moves = al->less_moves;
@@ -198,7 +204,8 @@ int main()
     
     printf("Stack d: %d,", d->number);
     printf(" %d,", e->number);
-    printf(" %d\n", f->number);
+    printf(" %d,", f->number);
+    printf(" %d\n", g->number);
 
     make_position(search_less_position(&a, &d, algoritmia), algoritmia, p);
 
@@ -209,18 +216,18 @@ int main()
     printf("\n");
     
 	printf("Stack a: ");
-	while (a)
+	while (p->a)
 	{
-    	printf("%d, ", a->number);
-		a = a->next;
+    	printf("%d, ", p->a->number);
+		p->a = p->a->next;
     }
 	printf("\n");
     
 	printf("Stack d: ");
-    while (d)
+    while (p->b)
 	{
-    	printf("%d, ", d->number);
-		d = d->next;
+    	printf("%d, ", p->b->number);
+		p->b = p->b->next;
     }
     return (0);
 }
