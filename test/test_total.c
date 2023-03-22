@@ -788,14 +788,23 @@ void	finish_him(t_parameters *p)
 {
 	int	tmp;
 	int	move;
+	int is_min;
 
+	is_min = 0;
 	tmp = ft_last(&p->a);
 	while (check_length(&p->a) != p->length)
 	{
-		if (p->b->number < tmp && !(p->b->number < ft_min(&p->a) && p->a->number == ft_min(&p->a)))
+		if (p->b->number < tmp && !(p->b->number < ft_min(&p->a)
+				&& p->a->number == ft_min(&p->a)))
 		{
 			rr_stack(&p->a, 'a');
 			tmp = ft_last(&p->a);
+		}
+		else if (is_min == 0 && p->b->number == ft_max(&p->b))
+		{
+			while (p->a->number != ft_min(&p->a))
+				rr_stack(&p->a, 'a');
+			is_min = 1;
 		}
 		else
 		{
@@ -891,4 +900,5 @@ int	main(int nword, char *arguments[])
 	free(parameters);
 	parameters = NULL;
 	exit(EXIT_SUCCESS);
+	return (0);
 }

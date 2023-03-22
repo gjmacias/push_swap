@@ -26,7 +26,7 @@ void	p_stack(t_stack **a, t_stack **b, char c)
 	(*a) = (*a)->next;
 	if (c == 'a')
 		write(1, "pa\n", 3);
-	else
+	else if (c == 'b')
 		write(1, "pb\n", 3);
 	free(tmp);
 }
@@ -43,13 +43,13 @@ void	s_stack(t_stack **top, char c)
 	}
 	if (c == 'a')
 		write(1, "sa\n", 3);
-	else
+	else if (c == 'b')
 		write(1, "sb\n", 3);
 }
 
 void	ss_stack(t_stack **a, t_stack **b)
 {
-	s_stack(a, 'a');
-	s_stack(b, 'b');
+	s_stack(a, ' ');
+	s_stack(b, ' ');
 	write(1, "ss\n", 3);
 }

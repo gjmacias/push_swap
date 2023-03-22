@@ -70,17 +70,19 @@ int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
 	return (al->position);
 }
 
-void	make_position(int position, t_algoritmia *alg, t_parameters *param)
+void	make_position(t_algoritmia *alg, t_parameters *param)
 {
 	if (alg->moves_a > 1 && alg->moves_b > 0)
 	{
 		while (alg->moves_b-- != 0 || alg->moves_a-- != 1)
 			r_rboth(&param->a, &param->b);
+		alg->moves_b++;
 	}
 	else if (alg->moves_a < -1 && alg->moves_b < 0)
 	{
 		while (alg->moves_b++ != 0 || alg->moves_a++ != -1)
 			rr_rboth(&param->a, &param->b);
+		alg->moves_b--;
 	}
 	if (alg->moves_a > 1)
 	{
@@ -146,7 +148,6 @@ int	order_3(t_stack **a, int min, int max)
 	return (1);
 }
 
-/*
 void	order(t_parameters *parameters)
 {
 	t_algoritmia	*algoritmia;
@@ -156,21 +157,24 @@ void	order(t_parameters *parameters)
 	algoritmia = malloc(sizeof(t_algoritmia));
 	if (!algoritmia)
 		ft_error(0);
-	while (check_order(&parameters->a, parameters->length) != 0)
+	while (reverse != 2)
 	{
-		if (parameters->length <= 3)
+		if (parameters->length_a <= 3 && reverse == 0)
 			reverse = order_3(&parameters->a, ft_min(&parameters->a),
 					ft_max(&parameters->a));
 		else if (reverse == 1)
+		{
+		    reverse = 2;
 			finish_him(parameters);
+		}
 		else
 		{
-			start_algoritmia(algoritmia, &parameters->b);
+			start_algoritmia(algoritmia, parameters);
 			fill_position(&parameters->a);
 			fill_position(&parameters->b);
-			make_position(search_less_position(&parameters->a, &parameters->b,
-					algoritmia), algoritmia, parameters);
+			search_less_position(&parameters->a, &parameters->b, algoritmia);
+			make_position(algoritmia, parameters);
 		}
+		parameters->length_a = check_length(&parameters->a);
 	}
 }
-*/

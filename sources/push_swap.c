@@ -29,7 +29,6 @@ void	start_algoritmia(t_algoritmia *algoritmia, t_parameters *p)
 	algoritmia->position = 0;
 }
 
-/*
 void	push_swap(t_parameters *parameters, char **arguments)
 {
 	parameters->split = fill_split(parameters, arguments);
@@ -41,7 +40,7 @@ void	push_swap(t_parameters *parameters, char **arguments)
 	parameters->length_a = check_length(&parameters->a);
 	order(parameters);
 }
-*/
+
 
 t_parameters	*ft_init_parameters(t_parameters *parameters)
 {
@@ -56,7 +55,7 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	return (parameters);
 }
 
-/*
+
 int	main(int nword, char *arguments[])
 {
 	t_parameters	*parameters;
@@ -70,4 +69,3 @@ int	main(int nword, char *arguments[])
 	parameters = NULL;
 	exit(EXIT_SUCCESS);
 }
-*/
