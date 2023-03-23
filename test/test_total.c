@@ -4,6 +4,8 @@
 # include <limits.h>
 # include <stdio.h>
 
+int   supermoves = 0;
+
 typedef struct s_algoritmia
 {
 	int		last_b;
@@ -276,6 +278,7 @@ void	r_stack(t_stack **stack, char c)
 		write(1, "ra\n", 3);
 	else  if (c == 'b')
 		write(1, "rb\n", 3);
+	supermoves = supermoves + 1;
 }
 
 void	r_rboth(t_stack **a, t_stack **b)
@@ -283,6 +286,7 @@ void	r_rboth(t_stack **a, t_stack **b)
 	r_stack(a, ' ');
 	r_stack(b, ' ');
 	write(1, "rr\n", 3);
+	supermoves = supermoves - 1;
 }
 
 /*
@@ -317,6 +321,7 @@ void	rr_stack(t_stack **stack, char c)
 		write(1, "rra\n", 4);
 	else if (c == 'b')
 		write(1, "rrb\n", 4);
+	supermoves = supermoves + 1;
 }
 
 void	rr_rboth(t_stack **a, t_stack **b)
@@ -324,6 +329,7 @@ void	rr_rboth(t_stack **a, t_stack **b)
 	rr_stack(a, ' ');
 	rr_stack(b, ' ');
 	write(1, "rrr\n", 4);
+	supermoves = supermoves - 1;
 }
 
 void	p_stack(t_stack **a, t_stack **b, char c)
@@ -343,6 +349,7 @@ void	p_stack(t_stack **a, t_stack **b, char c)
 	else
 		write(1, "pb\n", 3);
 	free(tmp);
+	supermoves = supermoves + 1;
 }
 
 void	s_stack(t_stack **top, char c)
@@ -359,6 +366,7 @@ void	s_stack(t_stack **top, char c)
 		write(1, "sa\n", 3);
 	else
 		write(1, "sb\n", 3);
+	supermoves = supermoves + 1;
 }
 
 void	ss_stack(t_stack **a, t_stack **b)
@@ -366,6 +374,7 @@ void	ss_stack(t_stack **a, t_stack **b)
 	s_stack(a, 'a');
 	s_stack(b, 'b');
 	write(1, "ss\n", 3);
+	supermoves = supermoves - 1;
 }
 
 int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
@@ -428,7 +437,6 @@ int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
 
 void	make_position(int position, t_algoritmia *alg, t_parameters *param)
 {
-    printf("a: %d, b: %d\n", alg->moves_a, alg->moves_b);
 	if (alg->moves_a > 1 && alg->moves_b > 0)
 	{
 		while (alg->moves_b-- != 0 && alg->moves_a-- != 1)
@@ -443,7 +451,6 @@ void	make_position(int position, t_algoritmia *alg, t_parameters *param)
 			rr_rboth(&param->a, &param->b);
 	    alg->moves_b--;
 	}
-    printf("a: %d, b: %d\n", alg->moves_a, alg->moves_b);
 	if (alg->moves_a > 1)
 	{
 		while (alg->moves_a-- != 1)
@@ -810,7 +817,7 @@ void	finish_him(t_parameters *p)
 		{
 			p_stack(&p->b, &p->a, 'a');
 		}
-		print(&p->a, &p->b);
+	//	print(&p->a, &p->b);
 	}
 	tmp = ft_min(&p->a);
 	move = end_search(&p->a, tmp);
@@ -824,12 +831,18 @@ void	finish_him(t_parameters *p)
 		while (++move <= 0)
 			rr_stack(&p->a, 'a');
 	}
+	print(&p->a, &p->b);
+	if (check_order(&p->a, p->length) == 0)
+	    printf("OK :)\n");
+	else
+		printf("NOT ok :(\n");
 }
 
 void	order(t_parameters *parameters)
 {
 	t_algoritmia	*algoritmia;
 	int				reverse;
+	int i = 2;
 
 	reverse = 0;
 	algoritmia = malloc(sizeof(t_algoritmia));
@@ -837,10 +850,12 @@ void	order(t_parameters *parameters)
 		ft_error(0);
 	while (reverse != 2)
 	{
-	    printf("length: %d,l_a: %d\n", parameters->length, parameters->length_a);
 		if (parameters->length_a <= 3 && reverse == 0)
+		{
 		    reverse = order_3(&parameters->a, ft_min(&parameters->a),
                 ft_max(&parameters->a));
+            print(&parameters->a, &parameters->b);
+		}
 		else if (reverse == 1)
 		{
 		    reverse = 2;
@@ -854,8 +869,11 @@ void	order(t_parameters *parameters)
 			make_position(search_less_position(&parameters->a, &parameters->b,
 					algoritmia), algoritmia, parameters);
 		}
-		print(&parameters->a, &parameters->b);
+	//	print(&parameters->a, &parameters->b);
 		parameters->length_a = check_length(&parameters->a);
+		i++;
+		printf("en B: %d/%d\n", i, parameters->length);
+		printf("supermoves: %d\n", supermoves);
 	}
 }
 
@@ -896,9 +914,9 @@ int	main(int nword, char *arguments[])
 		ft_error(0);
 	parameters = ft_init_parameters(parameters);
 	push_swap(parameters, arguments);
-
 	free(parameters);
 	parameters = NULL;
+	printf("supermoves: %d\n", supermoves);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -922,7 +940,7 @@ int	main(int nword, char *arguments[])
 
 
 
-
-
 NOT OK
 3274 -7453 5811 5139 -2509 -598 83 -8642 -101 7819 -7666 -440 2128 -2702 2698 -1067 7133 -1573 8068 639 -780 3080 3490 -5791 -5001 -999 8270 -9798 8373 8425 6503 7914 417 -389 -4467 4852 211 2275 2857 -9955 -7487 -2277 -4279 6696 4820 -7633 -9728 -8162 4189 4619 -2466 -6539 -3892 -7145 -5602 3065 -4396 1410 -8277 -4835 -6996 -6502 -9068 1181 -4208 -9663 4039 -9851 -2431 -1357 789 9502 2010 541 3418 -552 4425 4680 4348 -6932 5035 1638 128 1409 -6243 3751 -9700 3639 -2102 7510 -4938 9525 1601 -6697 6668 -3119 7201 -8142 3329 8325
+
+stack a: -9700, 128, 9525
