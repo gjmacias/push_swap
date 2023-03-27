@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void    print( int *s, int n)
 {
@@ -9,7 +10,6 @@ void    print( int *s, int n)
     i = 0;
     while (i < n)
         printf("%d, ", s[i++]);
-    printf("%d, ", s[i++]);
     printf("\n");
 }
 
@@ -30,28 +30,103 @@ int atoi(const char *s)
    return ((int) n);
 }
 
-void    factorial(int n)
+int    *make_malloc(int n)
 {
-    int *i;
-    int j;
+        int *i;
+        i = malloc(sizeof(int) * (n + 1));
+        return (i);
+
+}
+
+void    fill(int *i, int n)
+{
     int x;
 
-    i = malloc(sizeof(int) * n);
-    j = 0;
-    x = 0;
-    while (j != n)
+    x = -1;
+    while(++x < n)
+        i[x] = x + 1;
+    i[x] = 0;
+}
+
+void rotate(int *a, int n)
+{
+    int tmp;
+    int i;
+
+    i = 0;
+    tmp = a[i];
+    while (i < n)
     {
-        i[j++] = ++x;
+        a[i] = a[i + 1];
+        i++;
     }
-    print(i, n);
+    a[i] = tmp;
+}
+void rrotate(int *a, int n)
+{
+    int tmp;
+
+    tmp = a[n];
+    while (n > 0)
+    {
+        a[n] = a[n - 1];
+        n--;
+    }
+    a[n] = tmp;
+}
+
+void recursive( int *i, int n, const int k, int *proves)
+{
+    int x;
+    int y;
+    
+    y = 0;
+    if (n != 0)
+    {
+        x = y;
+        recursive(i, n - 1, k, proves);
+        while (y < n - 1)
+        {
+            //printf("maker r: position; i[%d], num rotating;%d\n",(k - n), n);
+            rotate (&i[(k - n)], n - 1);
+            recursive(i, n - 1, k, proves);
+            y++;
+        }
+        while (x < n - 1)
+        {
+            //printf("make rr: position; i[%d], num rotating;%d\n",(k - n), n);
+            rrotate(&i[(k - n)], n - 1);
+            x++;
+        }
+    }
+    else
+    {
+        print(i, k);
+        *proves = *proves + 1;
+    }
+}
+
+void factorial(int n)
+{
+    int *i;
+    int proves;
+    
+    proves = 0;
+    i = make_malloc(n);
+    fill(i, n);
+    recursive(i, n,(const int)n, &proves);
+    printf("proves: %d\n", proves);
     free(i);
 }
 
 int main(int n, char *s[])
 {
+    int i;
+
+    i = atoi(s[n - 1]);
     if (n == 2)
     {
-        factorial(atoi(s[n - 1]));
+        factorial(i);
     }
     else
         printf("parameters nop.");
