@@ -826,7 +826,12 @@ void	finish_him(t_parameters *p)
 		l_n--;
 	}
 	else
-		p_stack(&p->b, &p->a, 'a');
+	{
+	   if (p->b->number < s_a[0])
+	        l_n = -1;
+	   p_stack(&p->b, &p->a, 'a');
+
+	}
 	printf("\n\nim out\n\n");
 	while (ft_max(&p->b) != p->b->number)
 	{
@@ -854,17 +859,20 @@ void	finish_him(t_parameters *p)
 		l_n--;
 	}
 	else
-		p_stack(&p->b, &p->a, 'a');
+	{
+        if (p->b->number < s_a[0])
+            p_stack(&p->b, &p->a, 'a');
+	}
 	while (check_length(&p->a) != p->length)
 	{
-		if ((p->b->number < s_a[l_n]) && l_n != -1)
+		if ((p->b->number > s_a[l_n]) && l_n != -1)
 		{
 			rr_stack(&p->a, 'a');
 			l_n--;
 		}
 		else
 		{
-			p_stack(&p->b, &p->a, 'a');
+		    p_stack(&p->b, &p->a, 'a');
 		}
 	print(&p->a, &p->b);
 	}
