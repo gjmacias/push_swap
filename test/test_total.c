@@ -809,88 +809,34 @@ void	stack3_a(t_stack **a, int *s_a)
 void	finish_him(t_parameters *p)
 {
 	int	move;
-	int l_n;
-	int	s_a[3];
-	int tmp;
+	int	tmp;
 
-	l_n = 2;
-	stack3_a(&p->a, s_a);
-	if (p->b->number > s_a[0] && p->b->number < s_a[2] && l_n >= 1)
-	{
-		if (p->b->number > s_a[0] && p->b->number < s_a[1] && l_n == 2)
-		{
-			rr_stack(&p->a, 'a');
-			l_n--;
-		}
-		rr_stack(&p->a, 'a');
-		l_n--;
-	}
-	else
-	{
-	   if (p->b->number < s_a[0])
-	        l_n = -1;
-	   p_stack(&p->b, &p->a, 'a');
-
-	}
-	printf("\n\nim out\n\n");
-	while (ft_max(&p->b) != p->b->number)
-	{
-		if ((p->b->number < s_a[l_n]) && l_n != -1)
-		{
-			rr_stack(&p->a, 'a');
-			l_n--;
-		}
-		else
-		{
-			p_stack(&p->b, &p->a, 'a');
-		}
-	print(&p->a, &p->b);
-	}
-	printf("\n\n\n\nCHANGE\n\n\n\n");
-	tmp = ft_last(&p->a);
-	if (p->b->number > s_a[0] && p->b->number < s_a[l_n])
-	{
-		if (p->b->number > s_a[0] && p->b->number < s_a[1] && l_n == 2)
-		{
-			rr_stack(&p->a, 'a');
-			l_n--;
-		}
-		rr_stack(&p->a, 'a');
-		l_n--;
-	}
-	else
-	{
-        if (p->b->number < s_a[0])
-            p_stack(&p->b, &p->a, 'a');
-	}
-	while (check_length(&p->a) != p->length)
-	{
-		if ((p->b->number > s_a[l_n]) && l_n != -1)
-		{
-			rr_stack(&p->a, 'a');
-			l_n--;
-		}
-		else
-		{
-		    p_stack(&p->b, &p->a, 'a');
-		}
-	print(&p->a, &p->b);
-	}
-	tmp = ft_min(&p->a);
-	move = end_search(&p->a, tmp);
+	tmp = ft_max(&p->b);
+	move = end_search(&p->b, tmp);
 	if (move > 0)
 	{
 		while (--move >= 0)
-			r_stack(&p->a, 'a');
+			r_stack(&p->b, 'b');
 	}
 	else
 	{
 		while (++move <= 0)
-			rr_stack(&p->a, 'a');
+			rr_stack(&p->b, 'b');
+	}
+	tmp = ft_last(&p->a)
+	while(check_length(&p->a) != 0 && check_order(&p->a) != 0)
+	{
+		if (tmp > p->b->number)
+		{
+			rr_stack(&p->b, 'b');
+			tmp = ft_last;
+		}
+		else
+			p_stack(&p->b, &p->a, 'a');
 	}
 	print(&p->a, &p->b);
 	if (check_order(&p->a, p->length) == 0)
-	    printf("OK :)\n");
+		printf("OK :)\n");
 	else
 		printf("NOT ok :(\n");
 }
@@ -909,13 +855,13 @@ void	order(t_parameters *parameters)
 	{
 		if (parameters->length_a <= 3 && reverse == 0)
 		{
-		    reverse = order_3(&parameters->a, ft_min(&parameters->a),
-                ft_max(&parameters->a));
-            print(&parameters->a, &parameters->b);
+			reverse = order_3(&parameters->a, ft_min(&parameters->a),
+			ft_max(&parameters->a));
+			print(&parameters->a, &parameters->b);
 		}
 		else if (reverse == 1)
 		{
-		    reverse = 2;
+			reverse = 2;
 			finish_him(parameters);
 		}
 		else
