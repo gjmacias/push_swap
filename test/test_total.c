@@ -823,10 +823,22 @@ void	finish_him(t_parameters *p)
 		while (++move <= 0)
 			rr_stack(&p->b, 'b');
 	}
-	tmp = ft_last(&p->a)
+	
+	
+	
+	tmp = ft_last(&p->a);
+	moves = p->b->number;
+	if(tmp > moves)
+		rr_stack(&p->b, 'b');
+	else
+		p_stack(&p->b, &p->a, 'a');
+		
+
+	tmp = ft_last(&p->a);
+	moves = ft_max(&p->a);
 	while(check_length(&p->a) != 0 && check_order(&p->a) != 0)
 	{
-		if (tmp > p->b->number)
+		if (tmp > p->b->number && tmp != moves)
 		{
 			rr_stack(&p->b, 'b');
 			tmp = ft_last;
