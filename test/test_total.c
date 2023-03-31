@@ -827,24 +827,38 @@ void	finish_him(t_parameters *p)
 	
 	
 	tmp = ft_last(&p->a);
-	moves = p->b->number;
-	if(tmp > moves)
-		rr_stack(&p->b, 'b');
+	move = p->b->number;
+	if(tmp > move)
+		rr_stack(&p->a, 'a');
 	else
 		p_stack(&p->b, &p->a, 'a');
 		
 
 	tmp = ft_last(&p->a);
-	moves = ft_max(&p->a);
-	while(check_length(&p->a) != 0 && check_order(&p->a) != 0)
+	move = ft_max(&p->a);
+	while(check_length(&p->a) != p->length)
 	{
-		if (tmp > p->b->number && tmp != moves)
+	    printf("b numero;%d tmp;%d move;%d\n", p->b->number, tmp, move);
+		if (tmp > p->b->number && tmp != move)
 		{
-			rr_stack(&p->b, 'b');
-			tmp = ft_last;
+			rr_stack(&p->a, 'a');
+            tmp = ft_last(&p->a);
 		}
 		else
 			p_stack(&p->b, &p->a, 'a');
+	}
+	
+	tmp = ft_min(&p->a);
+	move = end_search(&p->a, tmp);
+	if (move > 0)
+	{
+		while (--move >= 0)
+			r_stack(&p->a, 'a');
+	}
+	else
+	{
+		while (++move <= 0)
+			rr_stack(&p->a, 'a');
 	}
 	print(&p->a, &p->b);
 	if (check_order(&p->a, p->length) == 0)
