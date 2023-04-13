@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   finish_him.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/13 10:09:36 by gmacias-          #+#    #+#             */
+/*   Updated: 2023/04/13 10:09:40 by gmacias-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -21,43 +32,45 @@ int	end_search(t_stack **a, int min)
 		return (-moves2);
 }
 
-void	finish_him(t_parameters *p)
+void	reorder(t_stack **a, int min, char c)
 {
-	int	tmp;
 	int	move;
-int is_min;
 
-	is_min = 0;
-	tmp = ft_last(&p->a);
-	while (check_length(&p->a) != p->length)
-	{
-		if (p->b->number < tmp && !(p->b->number < ft_min(&p->a)
-				&& p->a->number == ft_min(&p->a)))
-		{
-			rr_stack(&p->a, 'a');
-			tmp = ft_last(&p->a);
-		}
-		else if (is_min == 0 && p->b->number == ft_max(&p->b))
-		{
-			while (p->a->number != ft_min(&p->a))
-				rr_stack(&p->a, 'a');
-			is_min = 1;
-		}
-		else
-		{
-			p_stack(&p->b, &p->a, 'a');
-		}
-	}
-	tmp = ft_min(&p->a);
-	move = end_search(&p->a, tmp);
+	move = end_search(a, min);
 	if (move > 0)
 	{
 		while (--move >= 0)
-			r_stack(&p->a, 'a');
+			r_stack(a, c);
 	}
 	else
 	{
 		while (++move <= 0)
-			rr_stack(&p->a, 'a');
+			rr_stack(a, c);
 	}
+}
+
+void	finish_him(t_parameters *p, int tmp)
+{
+	int	move;
+
+	reorder(&p->b, ft_max(&p->b), 'b');
+	tmp = ft_last(&p->a);
+	move = p->b->number;
+	if (tmp > move)
+		rr_stack(&p->a, 'a');
+	else
+		p_stack(&p->b, &p->a, 'a');
+	tmp = ft_last(&p->a);
+	move = ft_max(&p->a);
+	while (check_length(&p->a) != p->length)
+	{
+		if (tmp > p->b->number && tmp != move)
+		{
+			rr_stack(&p->a, 'a');
+			tmp = ft_last(&p->a);
+		}
+		else
+			p_stack(&p->b, &p->a, 'a');
+	}
+	reorder(&p->b, ft_min(&p->a), 'a');
 }

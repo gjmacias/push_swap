@@ -771,6 +771,21 @@ void print(t_stack **a, t_stack **b)
 
 
 
+void	stack3_a(t_stack **a, int *s_a)
+{
+	int 	i;
+	t_stack	*tmp_a;
+
+	i = -1;
+	tmp_a = (*a);
+	while (++i != 3)
+	{
+		s_a[i] = tmp_a->number;
+		tmp_a = tmp_a->next;
+		printf("%d, %d\n ",s_a[i], i);
+	}
+}
+
 int	end_search(t_stack **a, int min)
 {
 	t_stack	*tmp;
@@ -790,76 +805,49 @@ int	end_search(t_stack **a, int min)
 	else
 		return (-moves2);
 }
-void	stack3_a(t_stack **a, int *s_a)
-{
-	int 	i;
-	t_stack	*tmp_a;
 
-	i = -1;
-	tmp_a = (*a);
-	while (++i != 3)
+void	reorder(t_stack **a, int min, char c)
+{
+	int	move;
+
+	move = end_search(a, min);
+	if (move > 0)
 	{
-		s_a[i] = tmp_a->number;
-		tmp_a = tmp_a->next;
-		printf("%d, %d\n ",s_a[i], i);
+		while (--move >= 0)
+			r_stack(&p->b, c);
+	}
+	else
+	{
+		while (++move <= 0)
+			rr_stack(&p->b, c);
 	}
 }
-
 
 void	finish_him(t_parameters *p)
 {
 	int	move;
 	int	tmp;
 
-	tmp = ft_max(&p->b);
-	move = end_search(&p->b, tmp);
-	if (move > 0)
-	{
-		while (--move >= 0)
-			r_stack(&p->b, 'b');
-	}
-	else
-	{
-		while (++move <= 0)
-			rr_stack(&p->b, 'b');
-	}
-	
-	
-	
+	reorder(&p->b, ft_max(&p->b), 'b');
 	tmp = ft_last(&p->a);
 	move = p->b->number;
-	if(tmp > move)
+	if (tmp > move)
 		rr_stack(&p->a, 'a');
 	else
 		p_stack(&p->b, &p->a, 'a');
-		
-
 	tmp = ft_last(&p->a);
 	move = ft_max(&p->a);
-	while(check_length(&p->a) != p->length)
+	while (check_length(&p->a) != p->length)
 	{
-	    printf("b numero;%d tmp;%d move;%d\n", p->b->number, tmp, move);
 		if (tmp > p->b->number && tmp != move)
 		{
 			rr_stack(&p->a, 'a');
-            tmp = ft_last(&p->a);
+			tmp = ft_last(&p->a);
 		}
 		else
 			p_stack(&p->b, &p->a, 'a');
 	}
-	
-	tmp = ft_min(&p->a);
-	move = end_search(&p->a, tmp);
-	if (move > 0)
-	{
-		while (--move >= 0)
-			r_stack(&p->a, 'a');
-	}
-	else
-	{
-		while (++move <= 0)
-			rr_stack(&p->a, 'a');
-	}
+	reorder(&p->b, ft_min(&p->a), 'a');
 	print(&p->a, &p->b);
 	if (check_order(&p->a, p->length) == 0)
 		printf("OK :)\n");

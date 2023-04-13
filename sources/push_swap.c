@@ -15,7 +15,7 @@
 void	start_algoritmia(t_algoritmia *algoritmia, t_parameters *p)
 {
 	if ((p->b) == NULL)
-		p_stack(&p->a, &p->b,'b');
+		p_stack(&p->a, &p->b, 'b');
 	algoritmia->last_b = ft_last(&p->b);
 	algoritmia->max_b = ft_max(&p->b);
 	algoritmia->min_b = ft_min(&p->b);
@@ -41,7 +41,6 @@ void	push_swap(t_parameters *parameters, char **arguments)
 	order(parameters);
 }
 
-
 t_parameters	*ft_init_parameters(t_parameters *parameters)
 {
 	parameters = (t_parameters *)malloc(sizeof(t_parameters));
@@ -54,7 +53,6 @@ t_parameters	*ft_init_parameters(t_parameters *parameters)
 	parameters->b = NULL;
 	return (parameters);
 }
-
 
 int	main(int nword, char *arguments[])
 {

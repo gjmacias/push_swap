@@ -12,49 +12,63 @@
 
 #include "push_swap.h"
 
-int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
+int	search_less_moves(t_algoritmia *alg, t_stack **a, t_stack **b)
 {
 	int	option[4];
 	int	result;
 
-	algoritmia->moves_a_rra = check_length(a) - algoritmia->moves_a_ra + 2;
-	algoritmia->moves_b_rra = check_length(b) - algoritmia->moves_b_ra;
-	option[0] = ft_max_int(algoritmia->moves_a_ra, algoritmia->moves_b_ra);
-	option[1] = ft_max_int(algoritmia->moves_a_rra, algoritmia->moves_b_rra);
-	option[2] = algoritmia->moves_a_ra + algoritmia->moves_b_rra;
-	option[3] = algoritmia->moves_a_rra + algoritmia->moves_b_ra;
+	alg->moves_a_rra = check_length(a) - alg->moves_a_ra + 2;
+	alg->moves_b_rra = check_length(b) - alg->moves_b_ra;
+	option[0] = ft_max_int(alg->moves_a_ra, alg->moves_b_ra);
+	option[1] = ft_max_int(alg->moves_a_rra, alg->moves_b_rra);
+	option[2] = alg->moves_a_ra + alg->moves_b_rra;
+	option[3] = alg->moves_a_rra + alg->moves_b_ra;
 	result = ft_min_array(option);
-	if (result < algoritmia->less_moves)
+	if (result < alg->less_moves)
 	{
 		if (result == option[0] || result == option[2])
-			algoritmia->moves_a = algoritmia->moves_a_ra;
+			alg->moves_a = alg->moves_a_ra;
 		else
-			algoritmia->moves_a = -(algoritmia->moves_a_rra);
+			alg->moves_a = -(alg->moves_a_rra);
 		if (result == option[0] || result == option[3])
-			algoritmia->moves_b = algoritmia->moves_b_ra;
+			alg->moves_b = alg->moves_b_ra;
 		else
-			algoritmia->moves_b = -(algoritmia->moves_b_rra);
-		algoritmia->less_moves = result;
+			alg->moves_b = -(alg->moves_b_rra);
+		alg->less_moves = result;
 	}
-	algoritmia->last_b = ft_last(b);
-	return (algoritmia->less_moves);
+	alg->last_b = ft_last(b);
+	return (alg->less_moves);
 }
 
-int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
+int	condition_of_slp(t_stack **tmp0, t_stack **tmp1, t_algoritmia *al)
 {
-	t_stack			*tmp[2];
-	int				moves;
+	t_stack	*tmp[2];
+	int		result1;
+	int		result2;
+	int		result;
+
+	tmp[0] = (*tmp0);
+	tmp[1] = (*tmp1);
+	result1 = ((tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
+			&& (tmp[1]->number != al->max_b));
+	result2 = (!(tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
+			&& !(tmp[0]->number > tmp[1]->number
+				&& tmp[0]->number < al->last_b));
+	result = (result1 || result2);
+	return (result);
+}
+
+int	search_less_pos(t_stack **a, t_stack **b, t_algoritmia *al)
+{
+	t_stack	*tmp[2];
+	int		moves;
 
 	tmp[0] = (*a);
 	while (tmp[0])
 	{
 		tmp[1] = (*b);
 		moves = 0;
-		while (((tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
-				&& (tmp[1]->number != al->max_b))
-			|| (!(tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
-				&& !(tmp[0]->number > tmp[1]->number 
-					&& tmp[0]->number < al->last_b)))
+		while (condition_of_slp(tmp[0], tmp[1], al))
 		{
 			al->last_b = tmp[1]->number;
 			tmp[1] = tmp[1]->next;
@@ -68,43 +82,6 @@ int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
 		tmp[0] = tmp[0]->next;
 	}
 	return (al->position);
-}
-
-void	make_position(t_algoritmia *alg, t_parameters *param)
-{
-	if (alg->moves_a > 1 && alg->moves_b > 0)
-	{
-		while (alg->moves_b-- != 0 || alg->moves_a-- != 1)
-			r_rboth(&param->a, &param->b);
-		alg->moves_b++;
-	}
-	else if (alg->moves_a < -1 && alg->moves_b < 0)
-	{
-		while (alg->moves_b++ != 0 || alg->moves_a++ != -1)
-			rr_rboth(&param->a, &param->b);
-		alg->moves_b--;
-	}
-	if (alg->moves_a > 1)
-	{
-		while (alg->moves_a-- != 1)
-			r_stack(&param->a, 'a');
-	}
-	else if (alg->moves_a < -1)
-	{
-		while (alg->moves_a++ != -1)
-			rr_stack(&param->a, 'a');
-	}
-	if (alg->moves_b > 0)
-	{
-		while (alg->moves_b-- != 0)
-			r_stack(&param->b, 'b');
-	}
-	else if (alg->moves_b < 0)
-	{
-		while (alg->moves_b++ != 0)
-			rr_stack(&param->b, 'b');
-	}
-	p_stack(&param->a, &param->b, 'b');
 }
 
 /*
@@ -148,33 +125,30 @@ int	order_3(t_stack **a, int min, int max)
 	return (1);
 }
 
-void	order(t_parameters *parameters)
+void	order(t_parameters *p)
 {
-	t_algoritmia	*algoritmia;
+	t_algoritmia	*a;
 	int				reverse;
 
 	reverse = 0;
-	algoritmia = malloc(sizeof(t_algoritmia));
-	if (!algoritmia)
+	a = malloc(sizeof(t_algoritmia));
+	if (!a)
 		ft_error(0);
 	while (reverse != 2)
 	{
-		if (parameters->length_a <= 3 && reverse == 0)
-			reverse = order_3(&parameters->a, ft_min(&parameters->a),
-					ft_max(&parameters->a));
-		else if (reverse == 1)
+		if (p->length_a <= 3 && reverse == 0)
 		{
-		    reverse = 2;
-			finish_him(parameters);
+			reverse = order_3(&p->a, ft_min(&p->a), ft_max(&p->a));
 		}
+		else if (reverse == 1)
+			finish_him(p, reverse++);
 		else
 		{
-			start_algoritmia(algoritmia, parameters);
-			fill_position(&parameters->a);
-			fill_position(&parameters->b);
-			search_less_position(&parameters->a, &parameters->b, algoritmia);
-			make_position(algoritmia, parameters);
+			start_algoritmia(a, p);
+			fill_position(&p->a);
+			fill_position(&p->b);
+			make_position(search_less_pos(&p->a, &p->b, a), a, p);
 		}
-		parameters->length_a = check_length(&parameters->a);
+		p->length_a = check_length(&p->a);
 	}
 }

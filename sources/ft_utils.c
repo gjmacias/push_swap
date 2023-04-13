@@ -12,13 +12,12 @@
 
 #include "push_swap.h"
 
-int ft_error(int num)
+int	ft_error(int num)
 {
 	write(1, "soy error :)\n", 11);
-    exit(0);
-    return (num);
+	exit(0);
+	return (num);
 }
-
 
 int	ft_sign(char *str)
 {
