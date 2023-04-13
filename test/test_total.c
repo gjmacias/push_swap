@@ -405,21 +405,36 @@ int	search_less_moves(t_algoritmia *algoritmia, t_stack **a, t_stack **b)
 	return (algoritmia->less_moves);
 }
 
+
+int	condition_of_slp(t_stack **tmp0, t_stack **tmp1, t_algoritmia *al)
+{
+	t_stack	*tmp[2];
+	int		result1;
+	int		result2;
+	int		result;
+
+	tmp[0] = (*tmp0);
+	tmp[1] = (*tmp1);
+	result1 = ((tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
+			&& (tmp[1]->number != al->max_b));
+	result2 = (!(tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
+			&& !(tmp[0]->number > tmp[1]->number
+				&& tmp[0]->number < al->last_b));
+	result = (result1 || result2);
+	return (result);
+}
+
 int	search_less_position(t_stack **a, t_stack **b, t_algoritmia *al)
 {
-	t_stack			*tmp[2];
-	int				moves;
+	t_stack	*tmp[2];
+	int		moves;
 
 	tmp[0] = (*a);
 	while (tmp[0])
 	{
 		tmp[1] = (*b);
 		moves = 0;
-		while (((tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
-				&& (tmp[1]->number != al->max_b))
-			|| (!(tmp[0]->number > al->max_b || tmp[0]->number < al->min_b)
-				&& !(tmp[0]->number > tmp[1]->number 
-					&& tmp[0]->number < al->last_b)))
+		while (condition_of_slp(tmp[0], tmp[1], al))
 		{
 			al->last_b = tmp[1]->number;
 			tmp[1] = tmp[1]->next;
@@ -814,12 +829,12 @@ void	reorder(t_stack **a, int min, char c)
 	if (move > 0)
 	{
 		while (--move >= 0)
-			r_stack(&p->b, c);
+			r_stack(a, c);
 	}
 	else
 	{
 		while (++move <= 0)
-			rr_stack(&p->b, c);
+			rr_stack(a, c);
 	}
 }
 
