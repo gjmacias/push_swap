@@ -66,23 +66,24 @@ void	check_duplicate(t_stack **a)
 int	check_atoi(const char *str)
 {
 	int				sign;
-	int				i;
 	long long int	num;
 
-	i = 0;
+	sign = 1;
 	num = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-		|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
-		i++;
-	sign = ft_sign((char *)&str[i]);
-	while (str[i] == '+' || str [i] == '-')
-		i++;
-	if (str[i] < '0' || str[i] > '9')
-		return (0);
-	while (str[i] >= '0' && str[i] <= '9')
+	while ((*str >= 9 && *str <= 12) || *str == ' ')
+		str++;
+	while (*str == '+' || *str == '-')
 	{
-		num = (num * 10) + (str[i] - '0');
-		if (num > INT_MAX || (sign * num) < INT_MIN || str[++i] == ' ')
+		if (*str == '-')
+		sign = -sign;
+	}
+		str++;
+	while (*str)
+	{
+		if (((sign * num) <= INT_MAX && (sign * num) >= INT_MIN)
+			&& (*str <= '9' && *str >= '0')
+			num = (num * 10) + (str[i] - '0');
+		else
 			return (0);
 	}
 	return (42);

@@ -19,42 +19,27 @@ int	ft_error(int num)
 	return (num);
 }
 
-int	ft_sign(char *str)
-{
-	int	i;
-	int	sign;
-
-	sign = 1;
-	i = 0;
-	while (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = -sign;
-		i++;
-	}
-	return (sign);
-}
-
 int	ft_atoi(const char *str)
 {
 	int				sign;
-	int				i;
 	long long int	num;
 
-	i = 0;
+	sign = 1;
 	num = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-		|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
-		i++;
-	sign = ft_sign((char *)&str[i]);
-	while (str[i] == '+' || str [i] == '-')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	while ((*str >= 9 && *str <= 12) || *str == ' ')
+		str++;
+	while (*str == '+' || *str == '-')
 	{
-		num = (num * 10) + (str[i] - '0');
-		if ((num * sign) > INT_MAX || (num * sign) < INT_MIN)
+		if (*str++ == '-')
+			sign = -sign;
+	}
+	while (*str)
+	{
+		if (((num * sign) <= INT_MAX && (num * sign) >= INT_MIN)
+			&& (*str >= '0' && *str <= '9'))
+			num = (num * 10) + (*str++ - '0');
+		else
 			return (0);
-		i++;
 	}
 	return ((int)num * sign);
 }

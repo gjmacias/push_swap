@@ -58,7 +58,7 @@ int	condition_of_slp(t_stack **tmp0, t_stack **tmp1, t_algoritmia *al)
 	return (result);
 }
 
-int	search_less_pos(t_stack **a, t_stack **b, t_algoritmia *al)
+void	search_less_pos(t_stack **a, t_stack **b, t_algoritmia *al)
 {
 	t_stack	*tmp[2];
 	int		moves;
@@ -81,7 +81,6 @@ int	search_less_pos(t_stack **a, t_stack **b, t_algoritmia *al)
 			al->position = tmp[0]->position;
 		tmp[0] = tmp[0]->next;
 	}
-	return (al->position);
 }
 
 /*
@@ -137,9 +136,7 @@ void	order(t_parameters *p)
 	while (reverse != 2)
 	{
 		if (p->length_a <= 3 && reverse == 0)
-		{
 			reverse = order_3(&p->a, ft_min(&p->a), ft_max(&p->a));
-		}
 		else if (reverse == 1)
 			finish_him(p, reverse++);
 		else
@@ -147,7 +144,8 @@ void	order(t_parameters *p)
 			start_algoritmia(a, p);
 			fill_position(&p->a);
 			fill_position(&p->b);
-			make_position(search_less_pos(&p->a, &p->b, a), a, p);
+			search_less_pos(&p->a, &p->b, a);
+			make_position(a, p);
 		}
 		p->length_a = check_length(&p->a);
 	}

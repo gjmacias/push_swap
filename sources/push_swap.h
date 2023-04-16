@@ -72,10 +72,12 @@ void			ft_stkadd_front(t_stack **stack, t_stack *new);
 void			ft_stkadd_back(t_stack **stack, t_stack *new);
 /*Ordenación*/
 int				search_less_moves(t_algoritmia *alg, t_stack **a, t_stack **b);
-int				search_less_pos(t_stack **a, t_stack **b, t_algoritmia *al);
-void			make_position(int pos, t_algoritmia *alg, t_parameters *param);
+void			search_less_pos(t_stack **a, t_stack **b, t_algoritmia *al);
 int				order_3(t_stack **a, int min, int max);
 void			order(t_parameters *parameters);
+/*Posicionamiento*/
+void			make_position(t_algoritmia *alg, t_parameters *param);
+void			make_pos_together(t_algoritmia *alg, t_parameters *param);
 /*Utiles de algoritmia*/
 int				ft_min(t_stack **b);
 int				ft_min_array(int *array);
