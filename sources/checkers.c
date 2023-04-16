@@ -32,14 +32,14 @@ int	check_order(t_stack **a, int length)
 	t_stack	*tmp;
 
 	if (check_length(a) != length)
-		return (-1);
+		return (1);
 	tmp = *a;
 	while (tmp && tmp->next)
 	{
 		if (tmp->number < tmp->next->number)
 			tmp = tmp->next;
 		else
-			return (-1);
+			return (1);
 	}
 	return (0);
 }
@@ -74,15 +74,15 @@ int	check_atoi(const char *str)
 		str++;
 	while (*str == '+' || *str == '-')
 	{
-		if (*str == '-')
+		if (*str++ == '-')
 		sign = -sign;
 	}
 		str++;
 	while (*str)
 	{
 		if (((sign * num) <= INT_MAX && (sign * num) >= INT_MIN)
-			&& (*str <= '9' && *str >= '0')
-			num = (num * 10) + (str[i] - '0');
+			&& (*str <= '9' && *str >= '0'))
+			num = (num * 10) + (*str++ - '0');
 		else
 			return (0);
 	}

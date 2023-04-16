@@ -68,7 +68,7 @@ void	search_less_pos(t_stack **a, t_stack **b, t_algoritmia *al)
 	{
 		tmp[1] = (*b);
 		moves = 0;
-		while (condition_of_slp(tmp[0], tmp[1], al))
+		while (condition_of_slp(&tmp[0], &tmp[1], al))
 		{
 			al->last_b = tmp[1]->number;
 			tmp[1] = tmp[1]->next;
@@ -101,15 +101,16 @@ int	order_3(t_stack **a, int min, int max)
 	t_stack	*tmp;
 
 	tmp = (*a)->next;
-	if (check_length(a) == 2 && (*a)->number > tmp->number)
+	if (check_length(a) == 2)
 	{
-		r_stack(a, 'a');
+		if ((*a)->number > tmp->number)
+			r_stack(a, 'a');
 		return (1);
 	}
 	tmp = tmp->next;
 	while (!((*a)->number == min && tmp->number == max))
 	{
-		if ((*a)->number != min
+		if ((*a)->number != min	
 			&& (*a)->number != max
 			&& tmp->number == min)
 			rr_stack(a, 'a');
@@ -127,18 +128,20 @@ int	order_3(t_stack **a, int min, int max)
 void	order(t_parameters *p)
 {
 	t_algoritmia	*a;
-	int				reverse;
 
-	reverse = 0;
 	a = malloc(sizeof(t_algoritmia));
 	if (!a)
 		ft_error(0);
-	while (reverse != 2)
+	while (check_order(&p->a, p->length))
 	{
-		if (p->length_a <= 3 && reverse == 0)
-			reverse = order_3(&p->a, ft_min(&p->a), ft_max(&p->a));
-		else if (reverse == 1)
-			finish_him(p, reverse++);
+		if (p->length_a <= 3)
+		{
+			order_3(&p->a, ft_min(&p->a), ft_max(&p->a));
+			if (check_length(&p->a) == p->length)
+				reorder(&p->a, ft_min(&p->a), 'a');
+			else
+				finish_him(p);
+		}
 		else
 		{
 			start_algoritmia(a, p);

@@ -49,8 +49,9 @@ void	reorder(t_stack **a, int min, char c)
 	}
 }
 
-void	finish_him(t_parameters *p, int tmp)
+void	finish_him(t_parameters *p)
 {
+	int tmp;
 	int	move;
 
 	reorder(&p->b, ft_max(&p->b), 'b');
@@ -72,5 +73,5 @@ void	finish_him(t_parameters *p, int tmp)
 		else
 			p_stack(&p->b, &p->a, 'a');
 	}
-	reorder(&p->b, ft_min(&p->a), 'a');
+	reorder(&p->a, ft_min(&p->a), 'a');
 }

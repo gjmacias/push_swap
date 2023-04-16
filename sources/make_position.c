@@ -1,7 +1,35 @@
 
 #include "push_swap.h"
 
-void	make_pos_together(t_algoritmia *alg, t_parameters *param)
+void	move_pos_together(t_algoritmia *alg, t_parameters *param)
+{
+	if (alg->moves_a > 1)
+	{
+		while (alg->moves_a-- != 1)
+			r_stack(&param->a, 'a');
+	}
+	else if (alg->moves_a < -1)
+	{
+		while (alg->moves_a++ != -1)
+			rr_stack(&param->a, 'a');
+	}
+}
+
+void	move_pos_together(t_algoritmia *alg, t_parameters *param)
+{
+	if (alg->moves_b > 0)
+	{
+		while (alg->moves_b-- != 0)
+			r_stack(&param->b, 'b');
+	}
+	else if (alg->moves_b < 0)
+	{
+		while (alg->moves_b++ != 0)
+			rr_stack(&param->b, 'b');
+	}
+}
+
+void	move_pos_together(t_algoritmia *alg, t_parameters *param)
 {
 	if (alg->moves_a > 1 && alg->moves_b > 0)
 	{
@@ -20,26 +48,13 @@ void	make_pos_together(t_algoritmia *alg, t_parameters *param)
 }
 void	make_position(t_algoritmia *alg, t_parameters *param)
 {
-	make_pos_togethe(alg, param);
-	if (alg->moves_a > 1)
+	if ((p->b) == NULL)
 	{
-		while (alg->moves_a-- != 1)
-			r_stack(&param->a, 'a');
+		p_stack(&p->a, &p->b, 'b');
+		return ;
 	}
-	else if (alg->moves_a < -1)
-	{
-		while (alg->moves_a++ != -1)
-			rr_stack(&param->a, 'a');
-	}
-	if (alg->moves_b > 0)
-	{
-		while (alg->moves_b-- != 0)
-			r_stack(&param->b, 'b');
-	}
-	else if (alg->moves_b < 0)
-	{
-		while (alg->moves_b++ != 0)
-			rr_stack(&param->b, 'b');
-	}
+	move_pos_together(alg, param);
+	move_pos_a(alg, param);
+	move_pos_b(alg, param);
 	p_stack(&param->a, &param->b, 'b');
 }
