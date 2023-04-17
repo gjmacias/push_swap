@@ -82,7 +82,6 @@ t_parameters	*ft_init_parameters(t_parameters *parameters);
 void			finish_him(t_parameters *param);
 /*Funciones utiles*/
 int				ft_error(int num);
-int				ft_sign(char *str);
 int				ft_atoi(const char *str);
 
 
@@ -254,20 +253,22 @@ int	check_atoi(const char *str)
 	num = 0;
 	while ((*str >= 9 && *str <= 12) || *str == ' ')
 		str++;
+
 	while (*str == '+' || *str == '-')
 	{
 		if (*str++ == '-')
-		sign = -sign;
-	}
+			sign = -sign;
 		str++;
+	}
 	while (*str)
 	{
-		if (((sign * num) <= INT_MAX && (sign * num) >= INT_MIN)
-			&& (*str <= '9' && *str >= '0'))
+		if (*str <= '9' && *str >= '0')
 			num = (num * 10) + (*str++ - '0');
 		else
 			return (0);
 	}
+	if (((sign * num) > INT_MAX || (sign * num) < INT_MIN))
+		return 0;
 	return (42);
 }
 
@@ -361,7 +362,35 @@ int	ft_atoi(const char *str)
 	return ((int)num * sign);
 }
 
-void	make_pos_together(t_algoritmia *alg, t_parameters *param)
+void	move_pos_a(t_algoritmia *alg, t_parameters *param)
+{
+	if (alg->moves_a > 1)
+	{
+		while (alg->moves_a-- != 1)
+			r_stack(&param->a, 'a');
+	}
+	else if (alg->moves_a < -1)
+	{
+		while (alg->moves_a++ != -1)
+			rr_stack(&param->a, 'a');
+	}
+}
+
+void	move_pos_b(t_algoritmia *alg, t_parameters *param)
+{
+	if (alg->moves_b > 0)
+	{
+		while (alg->moves_b-- != 0)
+			r_stack(&param->b, 'b');
+	}
+	else if (alg->moves_b < 0)
+	{
+		while (alg->moves_b++ != 0)
+			rr_stack(&param->b, 'b');
+	}
+}
+
+void	move_pos_together(t_algoritmia *alg, t_parameters *param)
 {
 	if (alg->moves_a > 1 && alg->moves_b > 0)
 	{
@@ -378,29 +407,17 @@ void	make_pos_together(t_algoritmia *alg, t_parameters *param)
 		alg->moves_b--;
 	}
 }
+
 void	make_position(t_algoritmia *alg, t_parameters *param)
 {
-	make_pos_together(alg, param);
-	if (alg->moves_a > 1)
+	if ((param->b) == NULL)
 	{
-		while (alg->moves_a-- != 1)
-			r_stack(&param->a, 'a');
+		p_stack(&param->a, &param->b, 'b');
+		return ;
 	}
-	else if (alg->moves_a < -1)
-	{
-		while (alg->moves_a++ != -1)
-			rr_stack(&param->a, 'a');
-	}
-	if (alg->moves_b > 0)
-	{
-		while (alg->moves_b-- != 0)
-			r_stack(&param->b, 'b');
-	}
-	else if (alg->moves_b < 0)
-	{
-		while (alg->moves_b++ != 0)
-			rr_stack(&param->b, 'b');
-	}
+	move_pos_together(alg, param);
+	move_pos_a(alg, param);
+	move_pos_b(alg, param);
 	p_stack(&param->a, &param->b, 'b');
 }
 
@@ -745,6 +762,8 @@ void	order(t_parameters *p)
 			else
 				finish_him(p);
 		}
+		else if (!(p->b))
+			p_stack(&p->a, &p->b, 'b');
 		else
 		{
 			start_algoritmia(a, p);

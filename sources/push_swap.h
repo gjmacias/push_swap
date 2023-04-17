@@ -88,9 +88,9 @@ void			start_algoritmia(t_algoritmia *algoritmia, t_parameters *p);
 void			push_swap(t_parameters *parameters, char **arguments);
 t_parameters	*ft_init_parameters(t_parameters *parameters);
 /*reordenacion final*/
-void			finish_him(t_parameters *param, int tmp);
+void			reorder(t_stack **a, int min, char c);
+void			finish_him(t_parameters *param);
 /*Funciones utiles*/
 int				ft_error(int num);
-int				ft_sign(char *str);
 int				ft_atoi(const char *str);
 #endif

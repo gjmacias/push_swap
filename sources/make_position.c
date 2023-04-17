@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   make_position.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmacias- <gmacias-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/17 15:49:53 by gmacias-          #+#    #+#             */
+/*   Updated: 2023/04/17 15:49:56 by gmacias-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	move_pos_together(t_algoritmia *alg, t_parameters *param)
+void	move_pos_a(t_algoritmia *alg, t_parameters *param)
 {
 	if (alg->moves_a > 1)
 	{
@@ -15,7 +26,7 @@ void	move_pos_together(t_algoritmia *alg, t_parameters *param)
 	}
 }
 
-void	move_pos_together(t_algoritmia *alg, t_parameters *param)
+void	move_pos_b(t_algoritmia *alg, t_parameters *param)
 {
 	if (alg->moves_b > 0)
 	{
@@ -46,11 +57,12 @@ void	move_pos_together(t_algoritmia *alg, t_parameters *param)
 		alg->moves_b--;
 	}
 }
+
 void	make_position(t_algoritmia *alg, t_parameters *param)
 {
-	if ((p->b) == NULL)
+	if ((param->b) == NULL)
 	{
-		p_stack(&p->a, &p->b, 'b');
+		p_stack(&param->a, &param->b, 'b');
 		return ;
 	}
 	move_pos_together(alg, param);

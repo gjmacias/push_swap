@@ -25,6 +25,10 @@ void	start_algoritmia(t_algoritmia *algoritmia, t_parameters *p)
 	algoritmia->moves_b = 0;
 	algoritmia->less_moves = INT_MAX;
 	algoritmia->position = 0;
+	fill_position(&p->a);
+	fill_position(&p->b);
+	search_less_pos(&p->a, &p->b, algoritmia);
+	make_position(algoritmia, p);
 }
 
 void	push_swap(t_parameters *parameters, char **arguments)

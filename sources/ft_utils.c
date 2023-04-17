@@ -14,7 +14,7 @@
 
 int	ft_error(int num)
 {
-	write(1, "soy error :)\n", 11);
+	write(1, "soy error :)\n", 13);
 	exit(0);
 	return (num);
 }

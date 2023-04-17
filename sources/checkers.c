@@ -75,17 +75,18 @@ int	check_atoi(const char *str)
 	while (*str == '+' || *str == '-')
 	{
 		if (*str++ == '-')
-		sign = -sign;
-	}
+			sign = -sign;
 		str++;
+	}
 	while (*str)
 	{
-		if (((sign * num) <= INT_MAX && (sign * num) >= INT_MIN)
-			&& (*str <= '9' && *str >= '0'))
+		if (*str <= '9' && *str >= '0')
 			num = (num * 10) + (*str++ - '0');
 		else
 			return (0);
 	}
+	if (((sign * num) > INT_MAX || (sign * num) < INT_MIN))
+		return (0);
 	return (42);
 }
 

@@ -110,7 +110,7 @@ int	order_3(t_stack **a, int min, int max)
 	tmp = tmp->next;
 	while (!((*a)->number == min && tmp->number == max))
 	{
-		if ((*a)->number != min	
+		if ((*a)->number != min
 			&& (*a)->number != max
 			&& tmp->number == min)
 			rr_stack(a, 'a');
@@ -142,14 +142,10 @@ void	order(t_parameters *p)
 			else
 				finish_him(p);
 		}
+		else if (!(p->b))
+			p_stack(&p->a, &p->b, 'b');
 		else
-		{
 			start_algoritmia(a, p);
-			fill_position(&p->a);
-			fill_position(&p->b);
-			search_less_pos(&p->a, &p->b, a);
-			make_position(a, p);
-		}
 		p->length_a = check_length(&p->a);
 	}
 }

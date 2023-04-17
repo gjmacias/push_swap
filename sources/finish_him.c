@@ -51,7 +51,7 @@ void	reorder(t_stack **a, int min, char c)
 
 void	finish_him(t_parameters *p)
 {
-	int tmp;
+	int	tmp;
 	int	move;
 
 	reorder(&p->b, ft_max(&p->b), 'b');

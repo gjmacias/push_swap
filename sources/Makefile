@@ -25,18 +25,20 @@
 
 NAME		=	push_swap
 
-SRCS		= 	$(wildcard *.c)
-OBJS 		=	${SRCS:%.c=%.o}
-OBJS_DIR        =       objects/
+SRCS		=	checkers.c		fill.c			finish_him.c	ft_utils.c		\
+				make_position.c move_stack.c	operation_r.c 	operations.c	\
+				order.c 		push_swap.c 	utils_algoritmia.c
+OBJS 		=	$(SRCS:%.c=%.o)
+OBJS_DIR	=	object	
 
 CC		=	gcc
-RM		=	bin/rm -rf
+RM		=	/bin/rm -rf
 
 CFLAGS		=	-g -Wall -Wextra -Werror
 
 all	:	$(NAME)
 
-$(NAME)	:	${OBJS}
+$(NAME)	:	$(OBJS)
 	@echo "Compiling push swap..."
 	@$(CC) $(CFLAGS) -o $@ $^
 	@mkdir $(OBJS_DIR)
@@ -45,12 +47,12 @@ $(NAME)	:	${OBJS}
 
 clean :
 	@echo "Removing push swap and libft objects..."
-	@${RM} ${OBJS_DIR}
+	@$(RM) $(OBJS_DIR)
 	@echo "Done !"
 
 fclean	:	clean
 	@echo "Removing execute push swap and libft.a..."
-	@${RM} $(NAME)
+	@$(RM) $(NAME)
 	@echo "Done !"
 
 re	:	fclean all
