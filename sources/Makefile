@@ -42,16 +42,16 @@ $(NAME)	:	$(OBJS)
 	@echo "Compiling push swap..."
 	@$(CC) $(CFLAGS) -o $@ $^
 	@mkdir $(OBJS_DIR)
-	@/bin/mv *.o $(OBJS_DIR)
+	@/bin/mv $(OBJS) $(OBJS_DIR)
 	@echo "Done !"
 
 clean :
-	@echo "Removing push swap and libft objects..."
+	@echo "Removing push swap objects..."
 	@$(RM) $(OBJS_DIR)
 	@echo "Done !"
 
 fclean	:	clean
-	@echo "Removing execute push swap and libft.a..."
+	@echo "Removing execute push swap..."
 	@$(RM) $(NAME)
 	@echo "Done !"
 
