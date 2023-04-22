@@ -25,24 +25,34 @@
 
 NAME		=	push_swap
 
+INCLUDERS	= 	sources/push_swap.h
+
 SRCS		=	checkers.c		fill.c			finish_him.c	ft_utils.c		\
 				make_position.c move_stack.c	operation_r.c 	operations.c	\
 				order.c 		push_swap.c 	utils_algoritmia.c
-OBJS 		=	$(SRCS:%.c=%.o)
-OBJS_DIR	=	object	
+
+OBJS_DIR	=	objects
+OBJS 		=	$(addprefix $(OBJS_DIR)/,$(SRCS:%.c=%.o))
+DEPS 		=	 $(SRCS:%.c=%.d)
 
 CC		=	gcc
 RM		=	/bin/rm -rf
 
-CFLAGS		=	-g -Wall -Wextra -Werror
+CFLAGS		=	-g -Wall -Wextra -Werror -MMD -fsanitize=address -fsanitize=undefined
 
-all	:	$(NAME)
+vpath %.c sources
+all	:	make_dir $(NAME)
 
-$(NAME)	:	$(OBJS)
+make_dir:
+		@mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o: sources/%.c Makefile
+		@$(CC) $(CFLAGS) -c $< -o $@
+
+-include $(DEPS)
+$(NAME)	:	$(OBJS) $(INCLUDERS)
 	@echo "Compiling push swap..."
-	@$(CC) $(CFLAGS) -o $@ $^
-	@mkdir $(OBJS_DIR)
-	@/bin/mv $(OBJS) $(OBJS_DIR)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "Done !"
 
 clean :
