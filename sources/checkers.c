@@ -72,7 +72,7 @@ int	check_atoi(const char *str)
 	num = 0;
 	while ((*str >= 9 && *str <= 12) || *str == ' ')
 		str++;
-	while (*str == '+' || *str == '-')
+	if (*str == '+' || *str == '-')
 	{
 		if (*str++ == '-')
 			sign = -sign;

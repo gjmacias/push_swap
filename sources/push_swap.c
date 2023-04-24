@@ -62,7 +62,7 @@ int	main(int nword, char *arguments[])
 
 	parameters = NULL;
 	if (nword < 2)
-		exit(EXIT_FAILURE);
+		ft_error(0);
 	parameters = ft_init_parameters(parameters);
 	push_swap(parameters, arguments);
 	free_stack(&parameters->a);
