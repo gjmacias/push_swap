@@ -15,7 +15,7 @@
 void	ft_error(int num)
 {
 	num = -1;
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(num);
 }
 
