@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-int	ft_error(int num)
+void	ft_error(int num)
 {
+	num = EXIT_FAILURE;
 	write(1, "Error\n", 6);
-	exit(EXIT_FAILURE);
-	return (num);
+	exit(num);
 }
 
 int	ft_atoi(const char *str)
