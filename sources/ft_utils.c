@@ -41,5 +41,7 @@ int	ft_atoi(const char *str)
 		else
 			return (0);
 	}
+	if (num * sign) == INT_MIN)
+		return (INT_MIN);
 	return ((int)num * sign);
 }
