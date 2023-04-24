@@ -12,6 +12,19 @@
 
 #include "push_swap.h"
 
+void	free_stack(t_stack **a)
+{
+	t_stack	*tmp;
+
+	while ((*a))
+	{
+		tmp = (*a);
+		(*a) = (*a)->next;
+		free(tmp);
+		tmp = NULL;
+	}
+}
+
 int	end_search(t_stack **a, int min)
 {
 	t_stack	*tmp;

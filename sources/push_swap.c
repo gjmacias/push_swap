@@ -65,6 +65,7 @@ int	main(int nword, char *arguments[])
 		ft_error(0);
 	parameters = ft_init_parameters(parameters);
 	push_swap(parameters, arguments);
+	free_stack(&parameters->a);
 	free(parameters);
 	parameters = NULL;
 	exit(EXIT_SUCCESS);

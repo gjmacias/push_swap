@@ -90,6 +90,7 @@ t_parameters	*ft_init_parameters(t_parameters *parameters);
 /*reordenacion final*/
 void			reorder(t_stack **a, int min, char c);
 void			finish_him(t_parameters *param);
+void			free_stack(t_stack **a);
 /*Funciones utiles*/
 int				ft_error(int num);
 int				ft_atoi(const char *str);
