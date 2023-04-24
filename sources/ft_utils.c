@@ -15,7 +15,7 @@
 int	ft_error(int num)
 {
 	write(1, "Error\n", 6);
-	exit(0);
+	exit(EXIT_FAILURE);
 	return (num);
 }
 
