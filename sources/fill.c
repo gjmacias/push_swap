@@ -30,6 +30,7 @@ t_stack	*fill_stack(t_parameters *parameters, char **split)
 		tmp = NULL;
 	}
 	free(tmp);
+	tmp = NULL;
 	return (parameters->a);
 }
 

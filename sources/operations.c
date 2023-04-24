@@ -29,6 +29,7 @@ void	p_stack(t_stack **a, t_stack **b, char c)
 	else if (c == 'b')
 		write(1, "pb\n", 3);
 	free(tmp);
+	tmp = NULL;
 }
 
 void	s_stack(t_stack **top, char c)

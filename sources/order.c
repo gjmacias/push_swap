@@ -148,4 +148,6 @@ void	order(t_parameters *p)
 			start_algoritmia(a, p);
 		p->length_a = check_length(&p->a);
 	}
+	free(a);
+	a = NULL;
 }
