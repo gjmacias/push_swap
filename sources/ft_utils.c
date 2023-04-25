@@ -19,6 +19,18 @@ void	ft_error(int num)
 	exit(num);
 }
 
+int	ft_len(char *s)
+{
+	int	i;
+
+	if (!*s)
+		return (20);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+ 
 int	ft_atoi(const char *str)
 {
 	int				sign;
@@ -33,7 +45,7 @@ int	ft_atoi(const char *str)
 		if (*str++ == '-')
 			sign = -sign;
 	}
-	while (*str)
+	while (str)
 	{
 		if (((num * sign) <= INT_MAX && (num * sign) >= INT_MIN)
 			&& (*str >= '0' && *str <= '9'))
