@@ -74,7 +74,7 @@ int	check_atoi(const char *str)
 		str++;
 	if (*str == '+' || *str == '-')
 	{
-		if (*str++ == '-')
+		if (*str == '-')
 			sign = -sign;
 		str++;
 	}
@@ -99,7 +99,7 @@ void	check_is_number(char **split)
 	i = -1;
 	while (split[++i])
 	{
-		if (check_atoi(split[i]) == 0)
+		if (check_atoi(split[i]) == 0 || ft_len(split[i]) > 12)
 			ft_error(0);
 	}
 }
