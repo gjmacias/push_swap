@@ -70,17 +70,19 @@ int	check_atoi(const char *str)
 
 	sign = 1;
 	num = 0;
-	while ((*str >= 9 && *str <= 12) || *str == ' ')
-		str++;
+
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
 			sign = -sign;
 		str++;
 	}
+	if(!*str)
+		return (0);
 	while (*str)
 	{
-		if (*str <= '9' && *str >= '0')
+		if (((sign * num) <= INT_MAX && (sign * num) >= INT_MIN)
+			&& (*str <= '9' && *str >= '0'))
 			num = (num * 10) + (*str++ - '0');
 		else
 			return (0);
