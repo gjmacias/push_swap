@@ -70,14 +70,13 @@ int	check_atoi(const char *str)
 
 	sign = 1;
 	num = 0;
-
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
 			sign = -sign;
 		str++;
 	}
-	if(!*str)
+	if (!*str)
 		return (0);
 	while (*str)
 	{
