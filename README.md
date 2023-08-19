@@ -22,7 +22,18 @@ push_swap es un proyecto de [42][1] sobre algoritmia simple, donde debes ordenar
 | rrb | reverse rotate b - desplaza hacia abajo todos los elementos del stack b una posición, el último elemento se convierte en el primero. |
 | rrr | rra y rrb a la vez. |
 
-![](https://github.com/gjmacias/push_swap/bl/push_swap.gif)
+Muestro por aqui los movimientos máximos permitidos por cantidad de numeros:
+
+- 3 numeros: 	**Max 3 movimientos**
+- 5 numeros: 	**Max 12 movimientos**
+- 100 numeros:	**Menos de 700**; ⭐⭐⭐⭐⭐ |  701 a 900; ⭐⭐⭐⭐ |  901 a 1100; ⭐⭐⭐ |  1101 a 1300; ⭐⭐ |  1301 a 1500; ⭐ |
+- 500 numeros:	**Menos de 5500**; ⭐⭐⭐⭐⭐ |  5501 a 7000; ⭐⭐⭐⭐ |  7001 a 8500; ⭐⭐⭐ |  8501 a 10000; ⭐⭐ |  10001 a 11500; ⭐ |
+
+ Y aquí mostramos unos ejemplos de su funcionamiento:
+
+![push_swap_pequeño](https://github.com/gjmacias/push_swap/assets/98602276/5c82a898-c2d2-4535-9c58-7ff46e9b7f4f)
+
+![push_swap](https://github.com/gjmacias/push_swap/assets/98602276/7f41980b-3722-4b0f-b3b1-5b774b34134f)
 
 ### Que utilizamos?
 En nuestro **push_swap** tenemos solo las siguentes funciones de librerias externas autorizadas:
