@@ -22,7 +22,7 @@ push_swap es un proyecto de [42][1] sobre algoritmia simple, donde debes ordenar
 | rrb | reverse rotate b - desplaza hacia abajo todos los elementos del stack b una posición, el último elemento se convierte en el primero. |
 | rrr | rra y rrb a la vez. |
 
-<a>src="https://miro.medium.com/v2/resize:fit:640/1*ZLKF3qJ75poRylB9g8wM5w.gif">
+![](https://github.com/gjmacias/push_swap/bl/push_swap.gif)
 
 ### Que utilizamos?
 En nuestro **push_swap** tenemos solo las siguentes funciones de librerias externas autorizadas:
