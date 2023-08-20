@@ -112,7 +112,7 @@ Aqui se pueden solapar movimientos ya que si los dos van hacia arriba o hacia ab
 - Stack A arriba y Stack B arriba: *Solapan* - 192 y 5 = **192 movimientos**
 - Stack A abajo y Stack B abajo: *Solapan* - 108 y 95 = **108 movimientos**
 - Stack A arriba y Stack B abajo: 192 + 95 = **287 movimientos**
-- Stack A abajo y Stack B arriba: 108 y 5 = **109 movimientos**
+- Stack A abajo y Stack B arriba: 108 y 5 = **113 movimientos**
 
 En este caso la mejor opcion seria solapar movimientos rotativos hacia abajo y luego el stack que falte por rotar rote solo.
 
